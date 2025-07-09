@@ -1,0 +1,864 @@
+{
+  "prefix": "178.173.232.0/22",
+  "as_path": "[17639, 9304, 15412, 6079]",
+  "origin_as": "AS6079",
+  "authorized_as in ROAs": "AS42689",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 178.173.232.0/22 originates from AS6079, while the ROA authorizes AS42689. This makes the route RPKI-invalid. CAIDA shows AS15412 is a peer of AS6079. Examining the RIPEstat data, both AS6079 and AS42689 have routes registered under the 'Parsun-MNT' maintainer. Route object of AS42689 was created on 2025-05-30T12:01:37Z, a day before the announcement timestamp, 2025-05-31 00:07:04. Given this information, the likelihood of a close relationship is elevated, suggesting that the announcement is most likely benign. However, without a confirmed customer-provider or sibling relationship, it is difficult to assign a higher confidence level.",
+  "possible_reason": "A possible reason for the conflict could be a temporary misconfiguration during a network migration or traffic engineering activity. AS6079 might have temporarily announced the prefix, perhaps for testing or rerouting purposes, before the correct configuration was fully propagated, considering both ASes use 'Parsun-MNT'."
+}
+{
+  "prefix": "103.62.0.0/22",
+  "as_path": "[44393, 58057, 50673, 6762, 2516, 15830, 17941]",
+  "origin_as": "AS17941",
+  "authorized_as in ROAs": "AS32402",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.62.0.0/22 originates from AS17941, while the ROA authorizes AS32402. According to the RIPEstat data, AS17941 (BIT-ISLE Equinix Japan Enterprise K.K.) is announcing the prefix. The RIPEstat IRR data also lists both AS17941 and AS32402 as origin ASes for this prefix or its more specific prefixes, suggesting a potential coordination or transition. AS32402 (JADE TRADING AND WEB MARKETING) is also announcing related more specific prefixes. Both ASes have footprints in the Philippines. These data points suggest the invalidity might be due to a business relationship, transfer of IP resources that is not yet reflected in RPKI data, or a misconfiguration. While there is no direct AS relationship according to CAIDA data, the shared presence in the Philippines and the IRR records for both ASes make it medium likelihood that it's a benign misconfiguration. A more recent ROA update would be definitive but is not available in the provided context. Also, AS395793 announces more specifics of the announced prefix, and descr field of AS395793's IRR record matches the descr field of AS32402's IRR record, which provides a little more evidence of a relation between AS32402 and AS395793, thus AS17941 and AS32402 could also be related through AS395793.",
+  "possible_reason": "A possible reason could be a recent IP address transfer or lease agreement between AS32402 and AS17941, or a configuration error during a network migration or peering agreement. AS32402 might have previously been announcing the prefix and has since delegated it to AS17941, but the ROA has not been updated accordingly. Another possible reason could be that AS32402 is a customer of AS17941 in the Philippines, and due to traffic engineering or failover mechanisms, AS17941 is now announcing the prefix."
+}
+{
+  "prefix": "43.241.51.0/24",
+  "as_path": "[202365, 50673, 6762, 4134, 23650]",
+  "origin_as": "AS23650",
+  "authorized_as in ROAs": "AS63567",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 43.241.51.0/24 originates from AS23650, while the ROA authorizes AS63567.  CAIDA data does not directly link AS23650 and AS63567. However, the RIPEstat data of AS23650 announced prefixes indicates AS23650 announces the prefix 43.241.51.0/24. The AS path includes AS4134, which has a route object in the IRR database for 43.241.51.0/24. AS23650 is CHINANET-JIANGSU-PROVINCE-IDC. AS63567 is PGYIDC Suqian Pugongying Network Service Co. The geographic locations derived from RIPEstat are both in China.  Since AS23650 is a large Chinese ISP, AS63567 could be a customer of AS23650, and AS23650 announces its customer's prefix with its own AS number by mistake. Given the information, this is an ambiguous case, therefore, the possibility that it is benign is \"Medium\".",
+  "possible_reason": "Customer-provider relationship and potential misconfiguration. AS23650 may be announcing the prefix on behalf of AS63567 due to a misconfiguration or an agreement where AS23650 manages the prefix, but the ROA hasn't been updated, or AS23650 is announcing a customer's prefix using its own AS number by mistake."
+}
+{
+  "prefix": "140.233.187.0/24",
+  "as_path": "[7018, 1299, 35133, 201949]",
+  "origin_as": "AS201949",
+  "authorized_as in ROAs": "AS198584",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 140.233.187.0/24 originated from AS201949, but the ROA authorizes AS198584. According to CAIDA data, AS35133 is a provider of AS201949. The AS path also confirms this since AS35133 appears before AS201949. This suggests that AS201949 might be announcing the prefix on behalf of its customer, AS198584. The RIPEstat data shows that AS198584 has been announcing this prefix since 2025-06-22, and the IRR record also indicates that AS198584 is the origin for this prefix. But AS201949 was first seen announcing this prefix on 2024-07-31, based on RIPEstat data. Therefore, it is possible that there is a misconfiguration in the announcement. The relationship is not as strong as a direct customer-provider relationship, so the benign level is Medium.",
+  "possible_reason": "Misconfiguration where AS201949 is announcing the prefix on behalf of AS198584 without proper authorization in RPKI. Or traffic engineering where AS201949 is authorized to announce this prefix but the ROA has not been updated, or the ROA update has not propagated to all caches."
+}
+{
+  "prefix": "69.197.180.0/24",
+  "as_path": "[34927, 52025, 32097, 64236]",
+  "origin_as": "AS64236",
+  "authorized_as in ROAs": "AS32097",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 69.197.180.0/24 is announced by AS64236, while the ROA authorizes AS32097. According to CAIDA data, AS32097 is a provider of AS64236. Furthermore, the IHR Hegemony data confirms a strong dependency of AS64236 on AS32097 at the time of the announcement. This strong customer-provider relationship suggests that the origin AS is likely a customer of the authorized AS. Even though the announcement is technically RPKI invalid, it is highly likely to be benign because of the existing customer-provider relationship.",
+  "possible_reason": "The origin AS (AS64236) might be announcing a more specific prefix of an address space delegated to it by its provider (AS32097) for traffic engineering purposes. Alternatively, it could be a misconfiguration, where AS64236 is unintentionally announcing the prefix."
+}
+{
+  "prefix": "104.132.12.0/24",
+  "as_path": "[202365, 50673, 6762, 4637]",
+  "origin_as": "AS4637",
+  "authorized_as in ROAs": "AS41264",
+  "benign_level": "Medium",
+  "explanation": "The announcement 104.132.12.0/24 originated from AS4637, but the ROA indicates that only AS41264 is authorized to originate this prefix. According to RIPEstat, AS4637 announced this prefix at the announcement timestamp. Based on the CAIDA AS relationship data, AS6762 is a peer of AS4637. The announcement shows that AS4637 and AS41264 are not directly related. However, RIPEstat also shows that this prefix geolocates to Seoul, Korea. And AS4637 and AS41264 are both announcing prefixes geolocated to certain areas in Asia. Given this geographical relationship of prefixes announced by the two ASes, I infer the relation level between them is Medium.",
+  "possible_reason": "The origin AS in BGP update may want to use traffic engineering to attract traffic to the region where the authorized AS in ROA is located."
+}
+{
+  "prefix": "27.110.227.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 9299, 21433]",
+  "origin_as": "AS21433",
+  "authorized_as in ROAs": "AS9299, AS21443",
+  "benign_level": "High",
+  "explanation": "The prefix 27.110.227.0/24 is announced by AS21433, but is authorized by AS9299 and AS21443 according to RPKI data. The AS path includes AS9299, which is one of the authorized origin ASes. According to IHR Hegemony data, there is AS dependency from AS21433 to AS9299. RIPEstat data shows that AS9299 announces a less specific prefix 27.110.128.0/17 and 27.110.224.0/19. The RIPEstat data also shows that AS21433 has been announcing this prefix 27.110.227.0/24 since 2018-11-17. So it is highly probable that AS21433 is a customer of AS9299.",
+  "possible_reason": "Traffic engineering, where AS21433 might be announcing a more specific route to influence traffic flow, or AS9299 is allowing its customer AS21433 to originate its prefix due to some commercial agreement."
+}
+{
+  "prefix": "103.139.136.0/23",
+  "as_path": "[45049, 6696, 6762, 6453, 21859]",
+  "origin_as": "AS21859",
+  "authorized_as in ROAs": "AS146834",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 103.139.136.0/23 originated from AS21859, which is not authorized according to the ROA that authorizes AS146834 to originate this prefix with a maximum length of /24. RIPEstat indicates that more specific prefixes (103.139.136.0/24 and 103.139.137.0/24) are registered in RADB with origin AS146834. The AS path contains AS6453 and AS6762, which are also providers of AS21859. Additionally, AS146834 is a customer of AS21859. Given this customer-provider relationship and the fact that the invalid origin is announcing the aggregate of what the authorized origin is announcing, it's very likely that this is a benign origin conflict caused by route aggregation misconfiguration. The geolocation also points that both ASes are located in China.",
+  "possible_reason": "The origin AS may be intended to provide backup routing for the authorized AS in ROA or incorrect route aggregation configuration."
+}
+{
+  "prefix": "5.226.191.0/24",
+  "as_path": "[3549, 3356, 1299, 20473]",
+  "origin_as": "AS20473",
+  "authorized_as in ROAs": "AS215238",
+  "benign_level": "Medium",
+  "explanation": "The announcement originates from AS20473, while the ROA authorizes AS215238. According to the RIPEstat data, both AS20473 and AS215238 are announcing the prefix 5.226.191.0/24. RIPEstat shows that AS215238 has a route object record for this prefix created on 2025-05-31, the same day as the announcement. CAIDA shows that AS20473 has providers AS1299 and AS3356 in its AS path. Looking glass from RRC16 shows that AS215238 has AS1299 in its AS path. However, there is no direct AS relationship between AS20473 and AS215238 in the CAIDA data. Although both ASes originate the prefix according to IRR data, the close temporal proximity between the announcement and the ROA creation suggests a possible misconfiguration related to a transfer of origin authority or a change in routing policy. Given the lack of a clear AS relationship but the temporal proximity and shared IRR record, the likelihood of a benign origin conflict is assessed as Medium.",
+  "possible_reason": "Operator misconfiguration during a planned (or unplanned) transfer of prefix origination responsibility from AS20473 to AS215238."
+}
+{
+  "prefix": "81.181.175.0/24",
+  "as_path": "[59919, 41327, 3356, 9002, 34304, 34304]",
+  "origin_as": "AS34304",
+  "authorized_as in ROAs": "AS2914",
+  "benign_level": "High",
+  "explanation": "The announcement is RPKI invalid. The ROA authorizes AS2914 to originate 81.181.175.0/24. However, the announcement originates from AS34304. According to CAIDA AS relationship data, AS34304 is a customer of AS9002 and AS3356. Also, AS9002 is in the AS path of the announcement. Furthermore, the IHR Hegemony data indicates that AS34304 is a dependency of AS2914. Based on the RIPEstat data, TEENTELECOM, which is the holder of AS34304, created a route object for 81.181.175.0/24 with AS2914 as origin on 2025-05-30, one day before the announcement timestamp. This suggests a close operational relationship, possibly a customer-provider or transfer.",
+  "possible_reason": "Traffic engineering: AS34304, which is a customer of AS9002 and AS3356, might have been requested by AS2914 to originate the prefix due to a mutual business agreement."
+}
+{
+  "prefix": "120.28.196.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 132199]",
+  "origin_as": "AS132199",
+  "authorized_as in ROAs": "AS4775",
+  "benign_level": "High",
+  "explanation": "The announcement is RPKI invalid due to an origin AS mismatch. The ROA authorizes AS4775 for 120.28.196.0/22, while the BGP announcement originates from AS132199 for 120.28.196.0/24. However, CAIDA data shows that AS132199 is a customer of AS4775. Also, IHR Hegemony data confirms a strong dependency between AS132199 and AS4775, with a hegemony score of 1.0, indicating that AS132199 relies heavily on AS4775. RIPEstat data shows that the announced prefix geolocates to the Philippines, where both ASes (AS4775 and AS132199) operate. This customer-provider relationship and co-location in the Philippines strongly suggests that this is a benign origin conflict.",
+  "possible_reason": "The origin AS132199 might be announcing the prefix on behalf of AS4775 due to a misconfiguration or traffic engineering purposes. It's also possible that AS132199, as a customer of AS4775, is legitimately announcing a more specific route within the broader prefix covered by AS4775, but lacks the proper ROA authorization, or the ROA has not been updated to reflect the new arrangement."
+}
+{
+"prefix": "120.28.199.0/24",
+"as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 132199]",
+"origin_as": "AS132199",
+"authorized_as in ROAs": "AS4775",
+"benign_level": "High",
+"explanation": "The announced prefix 120.28.199.0/24 is RPKI invalid, as it is originated by AS132199, but the ROA only authorizes AS4775 for the prefix 120.28.196.0/22 (max length 24). However, CAIDA data shows that AS4775 is a provider of AS132199. Further, IHR data indicates that AS132199 depends on AS4775 with a hegemony score of 1.0 during the relevant time period. Also, RIPEstat's related prefixes data shows that AS4775 announces the less specific prefix 120.28.0.0/16. The RIPEstat data also includes IRR records indicating AS4775 is the origin for route objects related to 120.28.199.0/24. These multiple sources of evidence point to a customer-provider relationship, making the invalid announcement highly likely to be benign.",
+"possible_reason": "The origin AS might be manipulating the AS path to influence routing decisions (e.g., prepending or inserting AS numbers). Since AS4775 is the provider of AS132199, AS132199 may be advertising a more specific route. Traffic engineering or load balancing at customer-provider level."
+}
+{
+  "prefix": "31.56.59.0/24",
+  "as_path": "[34927, 52025, 64289, 16276]",
+  "origin_as": "AS16276",
+  "authorized_as in ROAs": "AS214481",
+  "benign_level": "Medium",
+  "explanation": "The announcement is RPKI invalid because AS16276 is announcing 31.56.59.0/24, but the ROA only authorizes AS214481.  OVH (AS16276) appears to have some peering relationships with transit providers, including AS52025 which shows in the AS path, but no relationship data shows a direct customer/provider relationship between OVH (AS16276) and Wojciech Czapkowicz (AS214481) makes the benign intent ambiguous. I am assigning it a \"Medium\" rating because the transfer history for the announced prefix shows that 31.56.0.0/14, which includes the announced prefix, was transferred between different holders, suggesting a possible business relationship exists. Additionally, the route objects in IRR indicate that the prefix had been originated by AS20473 at some point (last modified date indicates a recent issue), which hints that there may be some confusion or coordination problem in the origin.",
+  "possible_reason": "The invalid announcement might be due to a misconfiguration during a network migration or re-delegation event.  Specifically, if the transfer of IP resources was not fully coordinated with the routing policies, AS16276 may have inadvertently announced the prefix before the ROA could be updated or after a deliberate deaggregation/traffic engineering."
+}
+{
+  "prefix": "23.26.249.0/24",
+  "as_path": "[34927, 52025, 32097, 46450]",
+  "origin_as": "AS46450",
+  "authorized_as in ROAs": "AS199737",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 23.26.249.0/24 originates from AS46450, but the ROA authorizes AS199737.  According to RIPEstat data, both AS46450 and AS199737 have been observed announcing this prefix. The CAIDA AS relationship data doesn't show any direct customer-provider or peer relationship between AS46450 and AS199737. The AS path [34927, 52025, 32097, 46450] does not include AS199737, making it less likely to be a simple customer-provider misconfiguration. The RIPEstat's BGP looking glass shows multiple AS paths where AS199737 announces the prefix. Also, the RIPEstat's BGP looking glass shows AS46450 announcing the prefix via AS path: 25091 46450. The geolocation data indicates that both AS46450 and AS199737 have presence in US. Given that both ASNs announce the prefix, and no readily apparent relationship between AS46450 and AS199737 based on CAIDA data, I'd classify this as a 'Medium' likelihood of being benign. It's possible there's a business agreement that is not visible in public data, or a temporary operational issue.",
+  "possible_reason": "Traffic engineering, where AS46450 might be temporarily announcing the prefix on behalf of AS199737 due to a pre-existing business agreement or operational constraint. It could also stem from a misconfiguration within AS46450 where the route was inadvertently originated. Another possibility is that AS46450 is a backup AS for AS199737 and is announcing the prefix during a failover scenario, but this is less likely given the lack of explicit relationship and AS path details. Alternatively, AS46450 could be advertising the prefix to attract traffic for DDOS mitigation purposes."
+}
+{
+  "prefix": "200.84.128.0/19",
+  "as_path": "[34927, 52025, 174, 1299, 262589, 8048]",
+  "origin_as": "AS8048",
+  "authorized_as in ROAs": "AS10293",
+  "benign_level": "High",
+  "explanation": "The RPKI invalidity arises from AS8048 announcing 200.84.128.0/19, while the ROA authorizes AS10293. However, both AS8048 and AS10293 are 'CANTV Servicios' in Venezuela (VE). The RIPEstat 'related_prefixes' data indicates that AS10293 announces more specific prefixes (e.g., 200.84.128.0/24) of the announced prefix. This suggests AS10293 might be a more specific provider, or a more granular division of the same network. Both ASes are located in Venezuela and registered to the same organization, so it is likely a benign origin conflict.",
+  "possible_reason": "Possible misconfiguration or AS number migration within CANTV. It's also possible that AS8048 is used for certain types of traffic or in a specific geographic region within CANTV's network, or a traffic engineering configuration, and the ROA hasn't been updated to reflect this."
+}
+{
+  "prefix": "103.138.164.0/24",
+  "as_path": "[49673, 3216, 6762, 9498, 10075, 139026, 23923, 23923]",
+  "origin_as": "AS23923",
+  "authorized_as in ROAs": "AS139026",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows that AS139026 is the authorized origin for the prefix 103.138.164.0/24. The BGP update announces the same prefix but with AS23923 as the origin. This is an RPKI invalid route. The AS path includes AS139026 before AS23923, which indicates that AS23923 might be a customer or peer of AS139026 or there is AS path manipulation. CAIDA data shows that AS23923 has customers, providers, and peers, but none of them is AS139026. The RIPEstat data reveals that AS139026 (Shadhinota Net, BD) is located in Bangladesh. The RIPEstat data of AS23923 (Agni Systems Limited) also indicates location in Bangladesh. Considering the AS path and the geographical proximity between AS23923 and AS139026, the invalid announcement could be benign. It is a medium level because CAIDA doesn't provide direct relationship evidence between AS23923 and AS139026, therefore it is hard to confirm a customer-provider or sibling relationship between AS23923 and AS139026.",
+  "possible_reason": "A possible reason for the conflict could be a misconfiguration at AS23923, causing it to originate the prefix that should have been originated by AS139026. Alternatively, AS23923 might be legitimately advertising the prefix on behalf of AS139026 due to a business agreement or traffic engineering purposes but the ROA hasn't been updated to reflect this."
+}
+{
+  "prefix": "1.7.191.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 137130]",
+  "origin_as": "AS137130",
+  "authorized_as in ROAs": "AS9583",
+  "benign_level": "High",
+  "explanation": "The route is RPKI invalid, as AS137130 is announcing 1.7.191.0/24, while the ROA only authorizes AS9583. However, CAIDA data indicates AS9583 is a provider of AS137130. Additionally, the IHR Hegemony data shows a significant dependency of AS9583 on AS137130, further supporting a close relationship. RIPEstat data also shows that the prefix is announced by AS9583 as a less specific 1.7.188.0/22 and several more specifics are announced by AS9583. Given this evidence, it's highly probable that this RPKI invalid announcement is benign.",
+  "possible_reason": "A temporary misconfiguration, or a planned (but not yet RPKI-authorized) change in routing policy where AS137130, normally a customer, was briefly asked to originate the prefix by AS9583, possibly for traffic engineering or redundancy purposes."
+}
+{
+  "prefix": "103.67.23.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 17806, 150718]",
+  "origin_as": "AS150718",
+  "authorized_as in ROAs": "AS150753",
+  "benign_level": "High",
+  "explanation": "The announcement for 103.67.23.0/24 originates from AS150718, while the ROA authorizes AS150753. RIPEstat data shows both ASNs, AS150718 ('PIONEER-AS-AP Pioneer Services Limited') and AS150753 ('Pioneer Services Limited'), have similar names indicating they belong to the same organization or are closely affiliated. Furthermore, AS150753 has previously originated the prefix. The geographic location for both ASNs is Bangladesh (BD). CAIDA data shows AS17806 is a provider of AS150718. The RIPEstat data of AS150718 also shows that it announced the prefix from 2025-06-22 onwards. All evidence suggests a close relationship and recent origin change makes a benign misconfiguration very probable.",
+  "possible_reason": "A possible reason for the origin mismatch is a misconfiguration during a network migration or AS renumbering. Perhaps the prefix was intended to be announced by AS150753, but a configuration error led to AS150718 announcing it instead, or the ROA wasn't updated after the AS change. Traffic engineering needs could also be a contributing factor if AS150718 is trying to influence the path taken by traffic destined for this prefix."
+}
+{
+  "prefix": "27.110.215.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 9299, 137417]",
+  "origin_as": "AS137417",
+  "authorized_as in ROAs": "AS9299",
+  "benign_level": "High",
+  "explanation": "The announcement for 27.110.215.0/24 originates from AS137417, but the ROA authorizes AS9299. CAIDA AS relationship data indicates that AS9299 is a provider of AS137417. The IHR Hegemony data also reveals a dependency from AS137417 to AS9299 around the announcement time. RIPEstat also shows the geolocation of both ASes is in the Philippines. All evidence indicates that AS137417 is a customer of AS9299, making this a highly likely benign origin conflict.",
+  "possible_reason": "The customer AS137417 might be announcing its provider's (AS9299) prefix due to misconfiguration or a traffic engineering strategy where they want to influence the path selection, but doesn't have authorization of ROA."
+}
+{
+  "prefix": "156.236.19.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 21859]",
+  "origin_as": "AS21859",
+  "authorized_as in ROAs": "AS984, AS17561",
+  "benign_level": "Medium",
+  "explanation": "The announcement is RPKI invalid as AS21859 is not authorized to originate the prefix 156.236.19.0/24. The ROAs authorize AS984 and AS17561. According to RIPEstat, the prefix 156.236.19.0/24 is located in Manila, Philippines. The IRR records also show AS984 as the origin for 156.236.0.0/16. AS21859 (Zenlayer) has a peer relationship with AS6696 and a provider relationship with AS4755, AS6453, AS6762, and AS45049 according to CAIDA AS relationship data. AS4755 and AS6762 appear in the AS path. Furthermore, AS6453 and AS6762 are providers of AS21859 as well. There is no direct AS relationship between AS21859 and AS984 or AS17561. RIPEstat shows that the first seen origin of the prefix was AS207898 and the current origin is AS21859. Based on the geolocation, it looks like the prefix is in Philippines and AS984 is 'OWS Manila, Philippines' so the incorrect origin AS in this announcement is likely a misconfiguration, but more data needed to make any stronger claims.",
+  "possible_reason": "Accidental misconfiguration or a temporary routing error. Traffic engineering or load balancing are other possibilities, but less likely without a clearer relationship."
+}
+{
+  "prefix": "185.23.237.0/24",
+  "as_path": "[34927, 52025, 32097, 16276]",
+  "origin_as": "AS16276",
+  "authorized_as in ROAs": "AS209604",
+  "benign_level": "Medium",
+  "explanation": "The announcement is RPKI invalid because AS16276 announced 185.23.237.0/24, while the ROA only authorizes AS209604 to originate this prefix. According to RIPEstat, the announced prefix 185.23.237.0/24 is located in Istanbul, Turkey, and the origin AS209604 is also located in Turkey, which suggests a possible geographical proximity. The AS path contains AS34927 and AS52025 which are present in the list of AS16276's peers. Looking at the announcement peers of 185.23.237.0/24, we see that AS209604 is announcing it too. AS16276 began announcing this prefix on 2025-06-22. All these circumstantial clues point to a \"Medium\" likelihood of benign origin conflict, but more information would be needed for confirmation.",
+  "possible_reason": "Traffic engineering, where AS16276 is trying to provide a backup route or is testing a new configuration before fully transitioning the origin to AS209604. The IRR records showing a route object for AS209604 suggests that the latter should be originating the prefix."
+}
+{
+  "prefix": "181.233.80.0/22",
+  "as_path": "[17639, 40633, 29838, 61832, 268314]",
+  "origin_as": "AS268314",
+  "authorized_as in ROAs": "AS271482",
+  "benign_level": "High",
+  "explanation": "The announcement 181.233.80.0/22 from AS268314 is RPKI invalid as it is not authorized by AS271482 in the ROA. However, CAIDA AS relationship data shows that AS271482 is a customer of AS268314. RIPEstat data for the prefix 181.233.80.0/22 also confirms that AS271482 is the legitimate origin. The discrepancy is most likely due to a customer-provider relationship where AS268314, a provider of AS271482, is incorrectly announcing the prefix. Also, the RIPEstat data of AS268314 shows that AS268314 had announced this prefix at multiple times from 2025-06-22 to 2025-07-04. This further increases the likelihood of the benign relationship between the two ASes.",
+  "possible_reason": "Traffic engineering or misconfiguration. AS268314 might be announcing the prefix on behalf of AS271482 for traffic engineering purposes, but without proper ROA delegation. Alternatively, there could be a misconfiguration where AS268314 is inadvertently announcing the prefix."
+}
+{
+  "prefix": "45.248.169.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 133296, 45415, 45415, 45415, 45415, 45415, 45415, 132573, 132573, 132573, 132573]",
+  "origin_as": "AS132573",
+  "authorized_as in ROAs": "AS133232",
+  "benign_level": "Medium",
+  "explanation": "The route is RPKI invalid because AS132573 announced 45.248.169.0/24, but the ROA only authorizes AS133232 to originate 45.248.168.0/22 with a max length of /24. Both AS132573 and AS133232 are located in India. The IRR record shows that AS132573 also announced this prefix. Considering the geographical proximity and the fact that both ASNs are relatively small, it's possible there's a customer-provider or peering relationship not reflected in the available data. The AS path also appears suspect, with the repetition of AS45415, suggesting possible AS path manipulation. The relationship between AS132573 and its provider AS45415 in AS path makes the announcement not definitely a mistake.",
+  "possible_reason": "Traffic engineering or misconfiguration. It is possible that AS132573 is announcing a more specific route on behalf of AS133232 for traffic engineering purposes, though without explicit authorization in the ROA. A misconfiguration where AS132573 was incorrectly configured to announce the prefix is also a possibility. AS path pollution also can be a possible reason."
+}
+{
+  "prefix": "120.28.215.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 132199]",
+  "origin_as": "AS132199",
+  "authorized_as in ROAs": "AS4775",
+  "benign_level": "High",
+  "explanation": "The announcement is RPKI-invalid because AS132199 is announcing the prefix 120.28.215.0/24, while the ROA only authorizes AS4775 to originate this prefix. However, CAIDA data indicates AS4775 is a provider of AS132199. Hegemony data also confirms a customer-provider relationship where AS132199 depends on AS4775. RIPEstat indicates AS132199 and AS4775 are both located in the Philippines with related prefixes. This suggests a likely customer-provider relationship and a high likelihood that the origin conflict is benign.",
+  "possible_reason": "The customer AS132199 might be announcing the prefix due to a misconfiguration or a planned but not fully coordinated transfer of IP address space management from the provider AS4775."
+}
+{
+  "prefix": "103.239.168.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 55352, 55352, 55352, 55352, 55352, 55352, 133001, 133001, 133001, 133001, 133001]",
+  "origin_as": "AS133001",
+  "authorized_as in ROAs": "AS153271",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows that AS153271 is authorized to announce 103.239.168.0/22 with a maximum length of /24. However, AS133001 announced 103.239.168.0/24. This announcement is therefore RPKI invalid. According to the CAIDA AS relationship data, AS55352 is a provider of AS133001. The AS path indicates a possible path manipulation, due to repetitive ASNs. Both AS133001 and AS153271 are located in India, potentially indicating a regional or business relationship. The RIPEstat shows AS133001 has been announcing prefixes since 2014, and it is announcing the prefix 103.239.168.0/24 between 2014-11-23T16:00:00 and 2025-06-04T08:00:00. AS153271's first seen prefix is 160.250.146.0/23 at 2025-01-07T16:00:00. Given the geographical proximity and no strong evidence of a customer-provider relationship between AS133001 and AS153271, the benign level is evaluated as Medium.",
+  "possible_reason": "Traffic engineering, misconfiguration, or a business agreement where AS133001 was previously authorized or expected to announce the prefix but the ROA was not updated accordingly."
+}
+{
+  "prefix": "14.195.208.0/20",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820, 55441]",
+  "origin_as": "AS55441",
+  "authorized_as in ROAs": "AS45820",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid announcement for 14.195.208.0/20 originates from AS55441, while the ROA authorizes AS45820. CAIDA data indicates that AS45820 is a provider of AS55441. Additionally, IHR Hegemony data for the period near the announcement timestamp confirms AS45820 is a hegemonic AS for AS55441. Both ASes also have geolocation within India and are under the same maintenance organization. Therefore, there is strong evidence that AS55441 is a customer of AS45820, making this RPKI invalid announcement highly likely to be benign.",
+  "possible_reason": "Traffic engineering, where AS55441, for specific reasons, might be temporarily originating the prefix, even though AS45820 is the authorized origin. It can also be due to misconfiguration during planned maintenance."
+}
+{
+  "prefix": "45.248.168.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 133296, 45415, 45415, 45415, 45415, 45415, 45415, 132573, 132573, 132573, 132573]",
+  "origin_as": "AS132573",
+  "authorized_as in ROAs": "AS133232",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 45.248.168.0/24 originates from AS132573, while the ROA authorizes AS133232 to announce the 45.248.168.0/22 prefix. This makes the route RPKI invalid. AS132573 is located in India and announces 45.248.168.0/24. AS133232 is also located in India. The AS path includes AS4755, AS6453 and AS133296, which are well known global ASes. The repetition of AS45415 in the AS path may indicate AS path manipulation. According to CAIDA AS relationship data, AS45415 is a provider of AS132573. RIPEstat data shows that AS132573 has been announcing this prefix since 2025-06-22. The Routing Status section in RIPEstat of the prefix shows the last seen origin as AS132573. Given both ASes are located in India, and both ASes announce prefixes in the same IP range, there is a possibility of a business relationship or misconfiguration, which means it could be a benign origin conflict. However, there is no direct evidence to confirm a relationship (e.g., customer-provider, peer), so it can not be marked as 'High'. The ROA covers the /22, while the announcement is a /24, indicating a possible effort of sub-prefixing for traffic engineering.",
+  "possible_reason": "Traffic engineering or misconfiguration. AS132573 might be a customer of AS133232 and intended to announce a more specific route, or a misconfiguration may have occurred, leading to the incorrect origin AS in the announcement."
+}
+{
+  "prefix": "160.30.145.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 141308, 141308, 141308, 141308]",
+  "origin_as": "AS141308",
+  "authorized_as in ROAs": "AS135701",
+  "benign_level": "High",
+  "explanation": "The announcement 160.30.145.0/24 originated from AS141308, but the ROA indicates that AS135701 is authorized to originate 160.30.144.0/23 (max length 24). Both ASes, AS141308 (BYTRIXNP-AS) and AS135701 (BCPL-AS-IN), are located in India and share a similar name, BYTRIX. The RIPEstat data shows that AS141308 announced the prefix 160.30.145.0/24. Furthermore, the IRR records include route objects for 160.30.145.0/24 with origin AS135701, which suggests a relationship, and also 160.30.145.0/24 originated by AS141308, which suggests that this AS is entitled to originate the prefix in IRR. Given the same location and the fact that the holder names are very similar, it is highly likely that AS135701 and AS141308 belong to the same organization or have a close business relationship. The CAIDA data does not directly suggest the business relationship between AS141308 and AS135701. The geographical proximity and name similarity strongly suggest a benign origin conflict.",
+  "possible_reason": "The announcement from AS141308 may be due to a misconfiguration, where AS141308 was intended to originate the prefix. It is possible that the ROA for AS135701 was created to cover a broader range (160.30.144.0/23), and the more specific prefix (160.30.145.0/24) was then intended to be announced by AS141308 within the same organization. Traffic engineering or a change in network policy within the organization could also lead to this situation."
+}
+{
+  "prefix": "69.172.128.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 26627]",
+  "origin_as": "AS26627",
+  "authorized_as in ROAs": "AS3580",
+  "benign_level": "High",
+  "explanation": "The route is RPKI invalid because AS26627 is announcing the prefix 69.172.128.0/24, but the ROA only authorizes AS3580 to announce 69.172.128.0/20 (max length 32). The RIPEstat data shows that AS3580 (Planet Networks) acquired 69.172.128.0/20 from Pilosoft, Inc. in 2018-03-02. Furthermore, RIPEstat identifies AS26627 as 'AS-PILOSOFT'. This implies a clear historical ownership transfer of the prefix, with AS26627 being the former owner and AS3580 the current one. CAIDA shows AS26627's provider is AS29838. Since the transfer happened in 2018 and this announcement occurred in 2025, it's possible AS26627 is announcing the prefix, perhaps inadvertently or due to old configurations. Given the origin of AS26627 is the former owner of the prefix, the likelihood of this being a benign origin conflict is very high.",
+  "possible_reason": "The old configuration in AS26627 hasn't been updated since the AS sold the prefix to AS3580, or AS26627 is providing backup services for AS3580, and the configuration has not been updated. It could also be a misconfiguration or a temporary issue following a network change on AS26627's side."
+}
+{
+  "prefix": "177.11.173.0/24",
+  "as_path": "[17639, 37468, 269194, 52903, 52624]",
+  "origin_as": "AS52624",
+  "authorized_as in ROAs": "AS52903",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows that AS52903 is the authorized origin for the prefix 177.11.168.0/21 with a maximum length of /24, which includes the announced prefix 177.11.173.0/24. However, the BGP update originates from AS52624. According to the CAIDA data, AS52624 has AS53158 as a provider. While this doesn't directly link AS52624 to AS52903, it suggests AS52624 utilizes another provider. The RIPEstat data indicates that both AS52624 and AS52903 are located in Brazil and AS52903 announces related prefixes. The BGP looking glass data confirms AS52903 is originating the announced prefix. Also, RIPEstat data of AS52903 shows that it originates the announced prefix '177.11.173.0/24' since 2017. The transfer history for both ASes are empty. Taking all of these factors into consideration, the conflicting origin could be a misconfiguration or a business agreement between AS52624 and AS52903. Therefore, the likelihood is Medium.",
+  "possible_reason": "Possible misconfiguration or traffic engineering where AS52624 is authorized to announce the prefix, but the ROA hasn't been updated to reflect this. Also, AS52624 might be a customer of AS52903."
+}
+{
+  "prefix": "103.123.121.0/24",
+  "as_path": "[38001, 7473, 58453, 58453, 55685, 138072]",
+  "origin_as": "AS138072",
+  "authorized_as in ROAs": "AS138070",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.123.121.0/24 originates from AS138072, while the ROA authorizes AS138070 to announce this prefix. This makes the announcement RPKI invalid. The AS path is [38001, 7473, 58453, 58453, 55685, 138072]. Both AS138072 (SUFI-AS-ID PT Sumber Utama Fiber Indonesia) and AS138070 (JAMPER-AS-ID PT Jejaring Mitra Persada) are located in Indonesia and assigned by APNIC with close AS number ranges (138070 and 138072). This suggests a potential close relationship. The AS relationship data from CAIDA indicates that AS55685 is a provider of AS138072. RIPEstat shows that AS138072 announces prefixes 103.123.120.0/24, 103.123.123.0/24, 103.123.121.0/24 and 103.123.122.0/24, which indicates that AS138072 should be the legitimate origin of 103.123.121.0/24. All the above information hints the invalid announcement of prefix 103.123.121.0/24 is likely due to misconfiguration. The relatively close AS numbers and geographical proximity give a 'Medium' likelihood of being benign, although further investigation is needed to confirm their relationship.",
+  "possible_reason": "The RPKI invalid announcement might be caused by misconfiguration between AS138070 and AS138072. It is possible that AS138070 used to announce the prefix and forgot to update ROA after AS138072 became the new origin. Another reason is a simple typo when creating the ROA for the prefix, mistakenly authorizing AS138070 instead of AS138072."
+}
+{
+  "prefix": "194.102.217.0/24",
+  "as_path": "[29504, 15935, 9002, 34304, 34304]",
+  "origin_as": "AS34304",
+  "authorized_as in ROAs": "AS2914",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route originates from AS34304, while the ROA authorizes AS2914. The IHR Hegemony data indicates that AS34304 has a dependency on AS2914, suggesting AS2914 might be a provider or otherwise related to AS34304. The RIPEstat data confirms that the prefix is announced by AS2914 and the IRR record also lists AS2914 as the origin. The CAIDA data shows AS9002 is a provider of AS34304. The AS path includes AS9002 before AS34304, which suggests that AS34304 might have obtained the route from its provider.  Also, TEEN-MNT is listed as the maintainer for both the route object and AS34304, indicating a close relationship between the entities managing these resources. Given the multiple supporting data points indicating a customer-provider or management relationship, it's highly likely this is a benign origin conflict.",
+  "possible_reason": "Traffic engineering or accidental misconfiguration. AS34304, being a customer of AS2914, might be attempting to influence inbound traffic by announcing the prefix, even though it's not authorized to originate it according to the ROA. It is also possible AS34304 intended to announce a different prefix but introduced an error when configuring their router."
+}
+{
+  "prefix": "103.138.164.0/23",
+  "as_path": "[49673, 3216, 6762, 9498, 10075, 139026, 23923, 23923, 23923]",
+  "origin_as": "AS23923",
+  "authorized_as in ROAs": "AS139026",
+  "benign_level": "High",
+  "explanation": "The ROA indicates that AS139026 is the legitimate origin for the prefix 103.138.164.0/23. However, the BGP update originates from AS23923. The AS path shows AS139026 appearing before AS23923, implying that AS23923 is likely announcing a route it received from AS139026. The multiple repetitions of AS23923 in the AS path are suspicious and could be due to a loop or AS path manipulation. Also, RIPEstat shows that AS139026 is located in Bangladesh, the same country as AS23923, according to the geolocation data. Considering that AS139026 has been announcing this prefix since 2019, and AS23923 announces many prefixes of its own, this is probably a case where AS23923 is a customer, or peering of AS139026, or it's a misconfiguration.",
+  "possible_reason": "AS23923 might be announcing the prefix due to a misconfiguration, a traffic engineering policy, or AS23923 being a customer or peer of AS139026."
+}
+{
+  "prefix": "45.181.204.0/24",
+  "as_path": "[3549, 262186]",
+  "origin_as": "AS262186",
+  "authorized_as in ROAs": "AS264646, AS269746",
+  "benign_level": "Medium",
+  "explanation": "The announcement is RPKI invalid because AS262186 is announcing the prefix, but the ROA only authorizes AS264646 and AS269746. AS262186 and AS269746 are located in Colombia and AS262186 peers with AS3549 which is also a provider of AS262186, so there might be customer-provider relationship between them. Since AS269746 is announcing a more specific prefix 45.181.204.0/24, a less specific ROA 45.181.204.0/23 for AS269746 is expected, and this announcement may be resulted from operator's misconfiguration between AS262186 and AS269746. AS262186 is located in Colombia, the authorized ASes AS264646 and AS269746 are also located in Colombia, so geographically it is likely to be a benign origin conflict. Therefore, a 'Medium' level is assigned.",
+  "possible_reason": "The origin AS might have been authorized to originate the prefix but the ROA was not updated, or misconfiguration between AS262186 and AS269746. The AS path [3549, 262186, 269746, 269746] seen in RRC12 might support the case of misconfiguration, which indicates that the announcement from AS262186 is forwarded to AS269746 and announced by it."
+}
+{
+  "prefix": "154.223.148.0/23",
+  "as_path": "[45049, 6696, 6762, 6453, 21859, 137443, 137443]",
+  "origin_as": "AS137443",
+  "authorized_as in ROAs": "AS203020",
+  "benign_level": "Medium",
+  "explanation": "The announcement is RPKI invalid. The ROA authorizes AS203020 for 154.223.144.0/20 with a max length of 24, while the announcement comes from AS137443 for 154.223.148.0/23.  While there isn't a direct customer-provider relationship between AS137443 and AS203020, AS137443 has IRR records for 154.223.128.0/18 and 154.223.128.0/19. Also, the related prefixes show that AS203020 is announcing more specifics of 154.223.144.0/20, including 154.223.148.0/24 and 154.223.149.0/24. It's a medium likelihood because, despite the lack of direct AS relationship, the geographical proximity (geolocation data for AS137443 includes locations in France where this /23 is geolocated), AS137443 announcing a less specific prefix of 154.223.0.0/16, and AS203020 announcing more specifics prefixes under 154.223.144.0/20 suggests a potential (though unconfirmed) business relationship or operational coordination, but the transfer history data did not provide extra information to analyze their relationships.",
+  "possible_reason": "The invalid announcement could be due to a misconfiguration where AS137443 is supposed to announce more specifics of a less specific prefix (154.223.144.0/20) covered by AS203020's ROA or traffic engineering. The AS path also contains duplicates of the origin AS, indicating potential AS path manipulation, potentially in order to influence routing policy of upstream AS."
+}
+{
+  "prefix": "103.208.48.0/22",
+  "as_path": "[34800, 58057, 50673, 6762, 4134, 23650]",
+  "origin_as": "AS23650",
+  "authorized_as in ROAs": "AS63677, AS63679",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.208.48.0/22 originates from AS23650, while the ROAs authorize AS63677 and AS63679. AS23650 is 'CHINANET-JIANGSU-PROVINCE-IDC AS Number for CHINANET jiangsu province backbone', and the authorized ASes (AS63677 and AS63679) are 'XDCPLUSA Jiangsu Cloud Ever Information Technology Co. Ltd.' and 'XDCPLUSA Jiangsu Cloud Together Information Technology Co. Ltd.', respectively. All three ASes are located in Jiangsu Province, China. This suggests a potential business relationship or some form of coordination. CAIDA data shows AS4134, a China Telecom backbone AS, is a provider of AS23650. It's possible that AS63677 and AS63679, being cloud-related, are customers of AS23650 or connected to them in some way. The fact that the authorized ASes haven't announced any prefixes recently may indicate a change in their operational status, yet the origin AS still maintains them and their prefix. Without more explicit information about the relationship between these ASes, the likelihood of this being a benign origin conflict is assigned 'Medium'.",
+  "possible_reason": "The origin AS might be announcing the prefix on behalf of the authorized ASes due to a customer-provider agreement, a migration process, or a temporary traffic engineering setup. The ROA may not have been updated to reflect this change, or it could be a misconfiguration."
+}
+{
+  "prefix": "161.248.159.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 132215]",
+  "origin_as": "AS132215",
+  "authorized_as in ROAs": "AS153301",
+  "benign_level": "High",
+  "explanation": "The announcement for 161.248.159.0/24 was originated by AS132215, but the ROA authorizes AS153301. The AS path is [45049, 6696, 6762, 6453, 4755, 132215]. RIPEstat data indicates that AS153301 originates this prefix, and BGP looking glass data shows paths like '28917 6461 7473 9498 132215 153301', '20764 9498 132215 153301', '35598 9498 132215 153301', '24482 9498 132215 153301', and '41722 9498 132215 153301'. This consistently demonstrates that AS132215 is upstream of AS153301, and can be inferred as AS132215 is a provider of AS153301. According to CAIDA, AS132215's providers include AS4755, matching an AS in the path. Additionally, RIPEstat shows AS132215 is located in India, the same country as AS153301. All of these factors suggest a strong relationship. This is likely a case of misconfiguration where AS132215 is announcing the prefix on behalf of AS153301.",
+  "possible_reason": "Traffic engineering, misconfiguration, or a temporary agreement where AS132215 is providing transit for AS153301 and inadvertently originated the prefix. Operator error during route advertisement is a plausible explanation."
+}
+{
+  "prefix": "103.138.165.0/24",
+  "as_path": "[202365, 50673, 6453, 58453, 132602, 150748, 150748, 139026, 23923, 23923]",
+  "origin_as": "AS23923",
+  "authorized_as in ROAs": "AS139026",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 103.138.165.0/24 is announced by AS23923, while the ROA authorizes AS139026 to originate this prefix. RIPEstat data shows that AS139026 (Shadhinota Net) is located in Bangladesh, and the prefix is also geolocated to Bangladesh. Furthermore, the IRR data shows that AS139026 has registered route objects for both 103.138.164.0/23 and 103.138.165.0/24. The AS path contains 139026, indicating that 139026 might be involved in the route origination. The multiple occurence of 150748 and 139026 in the path, combined with the fact that AS23923 is also located in Bangladesh, suggests a potential customer-provider or other business relationship where AS23923 might be advertising the prefix on behalf of or in conjunction with AS139026. RIPEstat data shows that AS23923 announces a variety of prefixes and has been doing so since 2000, which suggests that it is probably not spoofing. The CAIDA data does not show a direct customer-provider relationship between AS23923 and AS139026. However, given the evidence, it is likely that the origin AS is announcing the prefix on behalf of AS139026, possibly due to a peering or transit agreement, which could represent a benign origin conflict. The BGP looking glass data provides AS paths to 139026 that contain 150748, consistent with the path in the announcement, which provides further confidence that the issue is not an outright spoof. The fact that AS139026 is consistently advertising the prefix at the time of the analysis further suggests it is legitimately using the IP space. Given that AS139026 announces the prefix as well, it is very probable that AS23923 is announcing it on their behalf, and is therefore considered High likelihood of benign intent.",
+  "possible_reason": "Traffic engineering or backup arrangement: AS23923 might be advertising the prefix to provide a more preferred path or as a backup in case of issues with AS139026's primary connection. It could also be a misconfiguration or an outdated agreement where AS23923 was previously authorized but the ROA was not updated after a change in the network setup, or AS23923 announcing the prefix on behalf of AS139026 due to a commercial agreement."
+}
+{
+  "prefix": "103.27.24.0/22",
+  "as_path": "[202365, 50673, 6830, 4837, 17816]",
+  "origin_as": "AS17816",
+  "authorized_as in ROAs": "AS58834",
+  "benign_level": "High",
+  "explanation": "The announcement 103.27.24.0/22 is originated by AS17816, but the RPKI ROA data indicates that only AS58834 is authorized to originate this prefix. However, the RIPEstat data indicates that AS17816 and AS58834 are both located in China, specifically Guangdong province. The RIPEstat data also reveals that AS58834 is announcing more specific prefixes of 103.27.24.0/22, like 103.27.24.0/24, 103.27.26.0/23, and 103.27.27.0/24. Furthermore, the 'routing_status' field in the RIPEstat JSON for the prefix 103.27.24.0/22 shows both AS17816 and AS58834 as origins at different times. Also, CAIDA data shows AS4837 as a provider of AS17816, and AS4837 appears in the AS path. These factors strongly suggest a close relationship (likely customer-provider or internal organizational relationship) between AS17816 and AS58834, making a benign origin conflict highly likely.",
+  "possible_reason": "Traffic engineering or a misconfiguration within China Unicom (AS17816) that caused the prefix to be originated from the wrong AS. It's possible AS17816 is providing transit or backup services for AS58834, or that AS58834 is using AS17816 as an upstream for a portion of its network."
+}
+{
+  "prefix": "180.191.80.0/22",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775]",
+  "origin_as": "AS4775",
+  "authorized_as in ROAs": "AS132199",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 180.191.80.0/22 announced by AS4775 is RPKI invalid because the authorized AS is AS132199. However, both AS4775 ('GLOBE-TELECOM-AS Globe Telecoms') and AS132199 ('GLOBE-MOBILE-5TH-GEN-AS Globe Telecom Inc.') are operated by Globe Telecom. AS4775 is also a customer of AS132199. It is very likely a misconfiguration within the same organization or an intentional announcement due to traffic engineering.",
+  "possible_reason": "Traffic engineering, internal routing policy adjustments, or misconfiguration within the Globe Telecom organization."
+}
+{
+  "prefix": "115.124.40.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820, 56124]",
+  "origin_as": "AS56124",
+  "authorized_as in ROAs": "AS58765",
+  "benign_level": "High",
+  "explanation": "The announcement 115.124.40.0/24 originated from AS56124, but the RPKI data indicates that AS58765 is authorized to originate 115.124.40.0/21 with a max length of /24. This creates an RPKI invalid announcement. While AS56124 is not the authorized origin AS, the RIPEstat data shows both AS56124 and AS58765 are located in India and announce the prefix 115.124.40.0/24 and the aggregate 115.124.40.0/21 respectively. The IRR records also show both AS56124 and AS58765 registered the route objects for prefix 115.124.40.0/24 and aggregate 115.124.40.0/21 respectively. Furthermore, historical transfer data indicates AS58765 (BTEL) acquired resources from AS58765 (formerly NIXI/BITTEL), suggesting a change in business structure or ownership. Considering the geographical proximity, and the historical context in the IRR records, it is highly likely that AS56124 has a close relationship (possibly customer-provider, or a business unit) with AS58765. Also, CAIDA relationship data shows that AS56124's provider is AS45820 which appear in the AS path. Moreover, AS58765 is announcing the prefix 115.124.40.0/24 at the time 2025-07-06T08:00:00. Finally, AS56124 announced the prefix 115.124.40.0/24 from 2025-06-22T08:00:00 to 2025-07-01T16:00:00 which overlaps with the announcement timestamp 2025-05-31 00:18:23. All evidence points to a high likelihood of a benign origin conflict.",
+  "possible_reason": "A possible reason is a misconfiguration after a network restructuring or acquisition. It's possible AS56124 was supposed to announce the prefix under the authority of AS58765 but was not properly configured due to IRR records. Alternatively, the announcement by AS56124 could have been for traffic engineering purposes, such as local preference adjustments or load balancing within the network."
+}
+{
+  "prefix": "45.112.58.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 55352, 55352]",
+  "origin_as": "AS55352",
+  "authorized_as in ROAs": "AS153271",
+  "benign_level": "Medium",
+  "explanation": "The prefix 45.112.58.0/24, originated by AS55352, is RPKI invalid because the ROA only authorizes AS153271 for the less specific prefix 45.112.56.0/22. Both ASes are located in India according to RIPEstat data, suggesting a possible regional or business relationship. The RIPEstat data indicates that 45.112.58.0/24 is a more specific prefix of 45.112.56.0/22, which AS55352 is authorized to announce according to IRR data. However, there is no direct AS relationship (customer/provider/peer) between AS55352 and AS153271 in CAIDA data. The geolocation data for both ASes also indicates they operate in India, but not necessarily in the same cities. Though they both operate in India, without a confirmed direct relationship between AS55352 and AS153271, and given the ROA covers a less specific, the level is 'Medium'.",
+  "possible_reason": "AS55352 might be a customer or downstream provider of AS153271 that was inadvertently not included in the ROA. It's also possible that there's a peering agreement in place but was not properly documented in the ROA."
+}
+{
+  "prefix": "115.109.128.0/17",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17908]",
+  "origin_as": "AS17908",
+  "authorized_as in ROAs": "AS4755",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route originates from AS17908, while the ROA authorizes AS4755 for the prefix 115.109.128.0/17. CAIDA data shows that AS17908 is a customer of AS4755. IHR Hegemony data also indicates a dependency relationship between AS17908 and AS4755 during the relevant time period (2025-05-24), with AS17908 depending on AS4755. RIPEstat also shows that AS17908 and AS4755 both locate in IN, and the prefix is annouced by AS17908 since 2009. The strong customer-provider relationship suggests a high likelihood of a benign origin conflict.",
+  "possible_reason": "The origin AS might have been changed recently, but the ROA record hasn't been updated in time. Another possible reason is traffic engineering, where the customer AS (AS17908) is trying to announce the prefix through a different provider than the one authorized in the ROA (AS4755)."
+}
+{
+  "prefix": "59.185.20.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9829]",
+  "origin_as": "AS9829",
+  "authorized_as in ROAs": "AS17813",
+  "benign_level": "High",
+  "explanation": "AS9829 (BSNL) and AS17813 (MTNL) are both Indian ISPs and there are multiple IRR records showing AS17813 (MTNL) to be announcing a broader prefix of 59.184.0.0/15 and 59.185.0.0/16, 59.185.0.0/17. RIPEstat data shows that MTNL Pool ROUTE OBJECT Through BSNL. Furthermore, the RIPEstat also shows that 'MTNL Pool ROUTE OBJECT Through BSNL'. This suggests that AS9829 is announcing a more specific prefix through AS17813 AS's infrastructure, so the RPKI invalid is very likely caused by operator misconfiguration between closely related ASes.",
+  "possible_reason": "Traffic engineering or a more specific announcement to handle localized routing issues or for testing before wider deployment."
+}
+{
+  "prefix": "27.107.203.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+  "origin_as": "AS45820",
+  "authorized_as in ROAs": "AS17762",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 27.107.203.0/24 originated from AS45820, while the ROA authorizes AS17762. However, both ASes are located in India and are operated by Tata Teleservices. Furthermore, IHR Hegemony data indicates a dependency (hege=0.3011978002546534) between AS45820 and AS17762. CAIDA also shows AS17762 as a provider of AS45820. These points suggest a customer-provider relationship, making a benign origin conflict highly probable.",
+  "possible_reason": "The origin AS might be announcing the prefix due to a temporary misconfiguration, traffic engineering, or a planned migration that hasn't been fully coordinated with the RPKI records."
+}
+{
+  "prefix": "103.196.135.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17439, 55352, 24554]",
+  "origin_as": "AS24554",
+  "authorized_as in ROAs": "AS135848",
+  "benign_level": "Medium",
+  "explanation": "The announcement 103.196.135.0/24 originated from AS24554, but the RPKI data indicates that only AS135848 is authorized to originate prefixes within 103.196.132.0/22 with a maximum length of /24. Thus, the announcement is RPKI invalid. AS24554 is located in India, according to RIPEstat data, which also announces numerous prefixes. AS135848 is also located in India according to RIPEstat. The RIPEstat data shows that both ASNs are located in India. This provides some circumstantial evidence that it could be benign. There is no clear customer-provider or peer relationship between AS24554 and AS135848 in CAIDA data. Given the geographical proximity and the lack of explicit AS relationship, the likelihood of this being a benign origin conflict is rated as medium.",
+  "possible_reason": "A possible reason for this conflict could be a misconfiguration where AS24554 is transiting traffic for AS135848, or vice versa, and mistakenly announced the prefix with its own AS number. This could also occur during a migration or acquisition where prefixes are temporarily announced from the wrong AS."
+}
+{
+  "prefix": "1.7.178.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 137130]",
+  "origin_as": "AS137130",
+  "authorized_as in ROAs": "AS9583",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 1.7.178.0/24 is originated by AS137130, while the ROA authorizes AS9583. However, AS137130 has a customer-provider relationship with AS9583 according to CAIDA data. Further, there's IHR hegemony data showing AS137130 dependent on AS9583. The RIPEstat shows that the geolocation of the announced prefix is in India, same as the SIFY, which indicates a benign origin conflict.",
+  "possible_reason": "The origin AS may have started announcing the prefix of its provider due to misconfiguration."
+}
+{
+  "prefix": "103.99.66.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 15830, 137083, 137083, 137083, 137083, 140148, 140148]",
+  "origin_as": "AS140148",
+  "authorized_as in ROAs": "AS150086",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows that AS150086 is the authorized origin for prefix 103.99.66.0/24. The BGP announcement indicates that AS140148 is the origin AS. Thus, the route is RPKI invalid. According to CAIDA AS relationship data, AS137083 is a provider of AS140148. Analyzing the AS path [45049, 6696, 6762, 6453, 4755, 15830, 137083, 137083, 137083, 137083, 140148, 140148], we can see that AS137083 is upstream of AS140148. The origin AS140148 and the authorized AS150086 both locate in India. The RIPEstat data shows that AS140148 announced this prefix since 2025-06-22, while AS150086 announced this prefix from 2022-10-22 to 2024-08-24. Considering the possible data errors and the historical announcement of the prefix by AS150086, there is a possibility that the prefix ownership changed hands. AS140148 is now announcing it. This is more likely a benign origin conflict. Thus, the level is set to Medium.",
+  "possible_reason": "Possible hand-off of the prefix from AS150086 to AS140148, or a misconfiguration following such a hand-off where the ROA was not properly updated. Another possibility is traffic engineering where AS140148 is announcing the prefix for local preference."
+}
+{
+  "prefix": "115.112.217.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 141464]",
+  "origin_as": "AS141464",
+  "authorized_as in ROAs": "AS4755",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 115.112.217.0/24 announced by AS141464 is likely benign due to the customer-provider relationship between AS141464 and AS4755. AS4755 is the authorized origin according to the ROA. The AS relationship data confirms that AS4755 is a provider of AS141464. The IHR Hegemony data further supports this relationship with a hegemony score of 0.5012626262626263, indicating a significant dependency of AS141464 on AS4755. The last-modified timestamp of the IRR record and routing history indicate that route object 115.112.217.0/24 was registered by AS4755 in RADB and APNIC.",
+  "possible_reason": "The origin AS might have inadvertently originated the prefix due to a misconfiguration. It is also possible that AS141464, being a customer of AS4755, was allowed to originate the prefix for traffic engineering purposes but the ROA was not updated accordingly or AS141464 is announcing a route object that AS4755 owns."
+}
+{
+  "prefix": "120.28.198.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 132199]",
+  "origin_as": "AS132199",
+  "authorized_as in ROAs": "AS4775",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 120.28.198.0/24 announced by AS132199 is likely benign. CAIDA AS relationship data and IHR data show that AS4775 is a provider of AS132199. The IHR hegemony data confirms this provider-customer relationship with a hegemony score of 1.0, observed one week before the announcement timestamp. The RIPEstat data for AS132199 indicates that it is located in the same geographical region (Philippines) as AS4775, suggesting a close operational relationship. The ROA covers a broader prefix (120.28.196.0/22) than the announced prefix (120.28.198.0/24), but the origin AS in the announcement is AS132199, and the authorized AS in ROA is AS4775. Moreover, RIPEstat IRR data shows route objects for 120.28.196.0/22 and other less specifics with origin AS4775. Also, looking glass data shows AS paths with AS4775 before AS132199, and a route object exists for a broader prefix 120.28.196.0/22 announced by AS132199.",
+  "possible_reason": "The origin AS in the announcement AS132199 may be a customer of AS4775. AS132199 could be announcing a more specific route than its provider AS4775 for traffic engineering purposes, without proper ROA creation."
+}
+{
+  "prefix": "14.192.4.0/22",
+  "as_path": "[45049, 6696, 6762, 6453, 21859, 400619, 400619, 400619]",
+  "origin_as": "AS400619",
+  "authorized_as in ROAs": "[AS18013, AS55020, AS138995]",
+  "benign_level": "High",
+  "explanation": "The announcement is RPKI invalid because AS400619 is announcing 14.192.4.0/22, but the ROA only authorizes AS18013, AS55020 and AS138995. CAIDA data shows that AS400619 is a customer of AS18013, AS55020 and AS138995, so it is highly probable that this RPKI invalid announcement is benign.",
+  "possible_reason": "The customer AS400619 may have intended to announce a more specific route but accidentally announced the aggregate prefix 14.192.4.0/22. Another possibility is a misconfiguration where AS400619 was authorized to announce this prefix by its provider, but the ROA was not properly updated."
+}
+{
+  "prefix": "27.107.176.0/20",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+  "origin_as": "AS45820",
+  "authorized_as in ROAs": "AS17762",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 27.107.176.0/20 originated from AS45820, while the ROA authorizes AS17762. Although RPKI invalid, the IHR Hegemony data indicates that AS45820 has a dependency (hege=0.3011978002546534) on AS17762 at the announcement timestamp. RIPEstat also confirms that 27.107.176.0/20 is related to 27.107.0.0/16, which is originated by AS17762. The geographical locations of AS45820 and AS17762 also overlap in India. AS45820 is listed as a customer of AS17762 in the CAIDA AS relationship data, indicating a customer-provider relationship. Thus, the origin AS45820 is very likely a customer of the authorized AS17762.",
+  "possible_reason": "The announcement by AS45820 might be due to a misconfiguration or a change in routing policy, where AS45820 started originating the prefix itself instead of having AS17762 originate it for them. This could also be part of a planned transition or traffic engineering strategy that was not properly coordinated with RPKI records."
+}
+{
+"prefix": "14.96.48.0/22",
+"as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+"origin_as": "AS45820",
+"authorized_as in ROAs": "AS137076",
+"benign_level": "High",
+"explanation": "The announcement 14.96.48.0/22 originated from AS45820, while the ROA authorized AS137076 to originate 14.96.48.0/21 with a maximum length of /24. Thus, the announcement is RPKI invalid. Both AS45820 and AS137076 are Tata Teleservices ISPs, according to RIPEstat. Furthermore, both ASes are located in India and announce prefixes within the 14.96.0.0/16 range. The IRR records also indicates that AS55740 and AS137076 are operated by TATA. These data points strongly suggest a close relationship between AS45820 and AS137076. Given the high likelihood of a customer-provider or sibling relationship, the invalid announcement is considered highly likely to be benign.",
+"possible_reason": "Traffic engineering or misconfiguration within the Tata Teleservices network."
+}
+{
+  "prefix": "103.148.249.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 134027, 134027, 134027, 134027, 134027, 134027]",
+  "origin_as": "AS134027",
+  "authorized_as in ROAs": "AS139569",
+  "benign_level": "High",
+  "explanation": "The announcement for prefix 103.148.249.0/24 originates from AS134027, while the RPKI ROA authorizes AS139569. Both AS134027 and AS139569 belong to Samsung Data Systems India Private Limited, as indicated by the RIPEstat data. The RIPEstat 'related_prefixes' data also shows that AS139569 announces 103.148.248.0/24, which is adjacent to the announced prefix. This strong organizational tie, coupled with their geographic proximity in India, strongly suggests a benign origin conflict. The AS path contains repeating ASNs, which may be caused by AS path prepending, but this doesn't invalidate the origin AS.",
+  "possible_reason": "The conflict might arise from internal re-organization, a change in routing policy, or a misconfiguration during a network migration within Samsung Data Systems India Private Limited. It's possible that AS134027 started announcing the prefix due to a traffic engineering decision, while the ROA was not yet updated to reflect this change. The IRR record lists AS139569 as the origin for this prefix, adding further support to this theory."
+}
+{
+  "prefix": "45.127.203.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17439, 55352, 24554]",
+  "origin_as": "AS24554",
+  "authorized_as in ROAs": "AS135848",
+  "benign_level": "Medium",
+  "explanation": "The announcement 45.127.203.0/24 originated from AS24554, while the ROA authorizes AS135848 for the 45.127.200.0/22 prefix (max length /24). This is an RPKI invalid route. Both ASes, AS24554 (Microscan Internet Limited) and AS135848 (Digitax India Communications Pvt Ltd.), are located in India. While the prefix is covered by the ROA, the origin AS is different. CAIDA AS relationship data does not show an explicit customer-provider or peer relationship between AS24554 and AS135848. However, the AS path includes AS55352, which is a provider of AS24554. This suggests AS24554 is likely a customer of AS55352. RIPEstat shows that AS24554 has been announcing the prefix 45.127.203.0/24 since 2022-03-23. The authorized ROA covers a broader prefix (45.127.200.0/22) that includes the announced prefix (45.127.203.0/24). Given both ASes are operating in India, and the similar business (telecommunications), it's possible that there's an unrecorded business relationship or an error in AS origination. Considering the lack of direct evidence and the geographical proximity of both ASes, the possibility of a benign origin conflict is assigned a 'Medium' level.",
+  "possible_reason": "A possible reason for this conflict could be a misconfiguration or a temporary operational issue where AS24554 is announcing the prefix that should be announced by AS135848. Another potential reason is that AS135848 is providing services to AS24554, and AS24554 is incorrectly originating the prefix of AS135848."
+}
+{
+  "prefix": "202.168.160.0/19",
+  "as_path": "[202365, 50673, 6830, 4837, 17816]",
+  "origin_as": "AS17816",
+  "authorized_as in ROAs": "AS58834",
+  "benign_level": "High",
+  "explanation": "The announced prefix 202.168.160.0/19 is RPKI invalid due to the origin AS being AS17816 while the ROA authorizes AS58834. However, RIPEstat shows the more specifics of 202.168.160.0/19 are originated by AS58834. The IRR records for the prefix 202.168.160.0/19 also specify AS17816 as the origin. The RIPEstat data indicates that AS17816 announces this prefix. The geolocation data shows that both AS17816 and AS58834 are located in China. The CAIDA AS relationship data shows that AS17816 has AS4837 as one of its providers. BGP looking glass shows that AS4837 appears in many AS paths for the prefix originated by AS17816. The transfer history data shows that the prefix range has been transferred between entities, including China Internet Network Information Center/GCableNET, which is associated with AS58834. The RIPEstat also shows that AS58834 is 'GCABLENET Guangdong Cable Corporation Limited'. Given the provider-customer relationship between AS17816 and AS4837, the location of both ASes in China, GCableNET's association with AS58834, and the prefix ownership transfer history, it's highly likely that this is a benign origin conflict. The fact that AS58834 originates more specifics further supports this claim.",
+  "possible_reason": "Traffic engineering, where AS17816 might be a subsidiary or customer of AS58834 and is announcing the prefix on its behalf, or a misconfiguration where AS17816 is announcing a prefix that should be announced by AS58834. Also, AS17816 might be acting as a backup for AS58834."
+}
+{
+  "prefix": "160.202.197.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 7633, 148000]",
+  "origin_as": "AS148000",
+  "authorized_as in ROAs": "AS148001, AS142501, AS148002",
+  "benign_level": "High",
+  "explanation": "The announced origin AS148000 belongs to 'INDIAN-PUBLIC-DNS' which is also the holder of the authorized ASNs AS148001, AS148002. Additionally, AS142501 is 'NIXI-IN-AS National Internet Exchange of India', AS148000 has AS142501 as one of its providers. The close organizational relationship and geographical proximity (both are located in India) suggests a high likelihood of a benign origin conflict. While the announcement timestamp is 2025-05-31, the RIPEstat data of AS148000 shows that AS148000 was already announcing 160.202.197.0/24 between 2025-06-27 and 2025-07-06, although the announcement in the analysed BGP update message happened earlier on 2025-05-31. AS148001 also has a route object for 160.202.197.0/24, indicating that they might be transiting this prefix before.",
+  "possible_reason": "Traffic engineering. AS148000 might be taking over origination of the prefix from AS148001, AS148002 or AS142501 for traffic engineering purposes but has not yet updated RPKI records to reflect this change or there might be an error in the announcement of prefixes."
+}
+{
+  "prefix": "1.7.228.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 137130]",
+  "origin_as": "AS137130",
+  "authorized_as in ROAs": "AS9583",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 1.7.228.0/24 originated from AS137130 while the ROA authorizes AS9583.  Although the AS path appears normal, RPKI validation fails. However, CAIDA shows AS9583 is a provider of AS137130. Further, Hegemony data indicates AS9583 has significant AS dependency with AS137130 around the announcement timestamp, and both ASes are located in India. This suggests a customer-provider relationship and a benign origin conflict.",
+  "possible_reason": "The customer AS137130 might have intended to announce a more specific prefix, and inadvertently announced the /24. Traffic engineering is a possibility."
+}
+{
+  "prefix": "103.239.169.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 55352, 55352, 55352, 55352, 55352, 55352, 133001, 133001, 133001, 133001, 133001]",
+  "origin_as": "AS133001",
+  "authorized_as in ROAs": "AS153271",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.239.169.0/24 originated from AS133001, but the ROA authorizes AS153271 for the covering prefix 103.239.168.0/22 with a maximum length of 24. This makes the announcement RPKI invalid. Both AS133001 and AS153271 are located in India according to RIPEstat. This geographical proximity suggests a potential relationship. However, CAIDA AS relationship data shows no direct relationship between AS133001 and AS153271. The IRR record for 103.239.169.0/24 indicates AS133001 is the origin, but this doesn't resolve the RPKI invalidity. Given the lack of direct AS relationship information, I assign a 'Medium' benign level. The fact that both ASes are in India suggests a possibility for a customer/provider relation that isn't reflected in CAIDA's data.",
+  "possible_reason": "The origin AS may be incorrectly configured, causing a mismatch with the authorized AS. This misconfiguration could be due to a mistake during a network migration or a change in peering agreements. Traffic engineering is less likely, as it would usually involve authorized AS."
+}
+{
+  "prefix": "58.69.38.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 9299, 21859]",
+  "origin_as": "AS21859",
+  "authorized_as in ROAs": "AS9299",
+  "benign_level": "High",
+  "explanation": "AS9299 (Philippine Long Distance Telephone Company, PH) is a provider of AS21859 (ZEN-ECN, US). The prefix 58.69.38.0/24 also has geolocation data indicating it is located in the Philippines. RIPEstat IRR data also shows a route object for a less specific prefix (58.69.0.0/16 and 58.69.0.0/18) originated by AS9299. Finally, IHR hegemony data indicates a small dependency of AS21859 to AS9299. Given all this, it is highly probable that this RPKI invalid is due to a benign origin conflict.",
+  "possible_reason": "Traffic engineering, where AS21859, for performance reasons or temporary configuration errors, starts originating a prefix that is normally originated by its provider AS9299."
+}
+{
+  "prefix": "49.249.226.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+  "origin_as": "AS45820",
+  "authorized_as in ROAs": "AS58693",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 49.249.226.0/24 is announced by AS45820, while the ROA authorizes AS58693. Both AS45820 ('TTSL-MEISISP Tata Teleservices ISP AS') and AS58693 ('NNI NNI') are located in India. Further, the IRR record for the route object 49.249.226.0/24 in the APNIC database lists AS58693 as the origin and includes a description of 'TTSL-ISP DIVISION'. A transfer history shows resource transfers among 'Tata Teleservices' entities. This suggests that AS45820 and AS58693 are closely related, possibly within the same organization or a customer-provider relationship, indicating a high likelihood of a benign origin conflict.",
+  "possible_reason": "A possible reason for the RPKI invalid announcement could be a misconfiguration during a network migration, AS number change, or traffic engineering activity where AS45820 was temporarily or incorrectly configured to originate the prefix that is normally originated by AS58693."
+}
+{
+  "prefix": "27.107.196.0/23",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+  "origin_as": "AS45820",
+  "authorized_as in ROAs": "AS17762",
+  "benign_level": "High",
+  "explanation": "The announcement for 27.107.196.0/23 originates from AS45820, while the ROA authorizes AS17762. IHR Hegemony data shows that AS45820 has a high dependency (hege=0.3011978002546534) on AS17762, suggesting that AS17762 is a provider for AS45820. This indicates a customer-provider relationship, making it highly likely that the origin conflict is benign, especially considering that both ASes are Tata Teleservices ASes located in India. Furthermore, the RIPEstat 'related_prefixes' data shows that 27.107.0.0/16 (less specific than the announced prefix) is originated by AS17762. IRR data also confirms the association of AS17762 with the broader 27.107.0.0/16 prefix.",
+  "possible_reason": "The invalid announcement may be due to a misconfiguration where AS45820 inadvertently announced the prefix. Traffic engineering could also lead to this issue, as the operator might be trying to influence traffic flow in an unintended manner or due to a configuration mistake."
+}
+{
+  "prefix": "120.28.197.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 132199]",
+  "origin_as": "AS132199",
+  "authorized_as in ROAs": "AS4775",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 120.28.197.0/24 announced by AS132199 is likely benign due to the customer-provider relationship between AS132199 (Globe Mobile) and AS4775 (Globe Telecom). CAIDA AS relationship data and IHR Hegemony data both confirm that AS132199 is a customer of AS4775. The RIPEstat data also shows that the announced prefix's geolocation is in the Philippines, which aligns with both ASNs' location in the Philippines. The route object of 120.28.196.0/22 created by AS132199 exists in APNIC IRR. Furthermore, there are BGP looking glass records which show the existence of path `4775 132199` for prefix 120.28.197.0/24.",
+  "possible_reason": "The origin AS conflict might be due to misconfiguration of RPKI ROA, traffic engineering, or a temporary change in routing policy where AS132199 is intentionally announcing the prefix instead of AS4775."
+}
+{
+  "prefix": "120.28.214.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 132199]",
+  "origin_as": "AS132199",
+  "authorized_as in ROAs": "AS4775",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 120.28.214.0/24 is announced by AS132199, while the ROA authorizes AS4775. CAIDA data and IHR Hegemony data both indicate that AS4775 is a provider of AS132199. The RIPEstat data also confirms that AS4775 is the origin AS of the less specific prefix 120.28.0.0/16. The IRR data also has route objects originated from AS4775 for this IP range, 120.28.0.0/16, 120.28.128.0/17, 120.28.192.0/18, 120.28.192.0/19, 120.28.208.0/20, 120.28.212.0/22, 120.28.214.0/24. There is strong evidence of a customer-provider relationship between the origin AS and authorized AS, and thus high likelihood that this is a benign origin conflict.",
+  "possible_reason": "The customer AS132199 might be announcing its provider's (AS4775) prefix due to a misconfiguration, or to provide a more specific route, possibly for traffic engineering purposes."
+}
+{
+  "prefix": "31.56.77.0/24",
+  "as_path": "[34927, 52025, 32097, 16276]",
+  "origin_as": "AS16276",
+  "authorized_as in ROAs": "AS834",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows AS834 is the authorized origin for the prefix 31.56.77.0/24. However, the announcement originates from AS16276. According to RIPEstat, AS16276 (OVH) announced this prefix from 2025-06-22 to 2025-07-06. The RIPEstat data also shows that the IP address block to which the prefix belongs was transferred to GOLD IP L.L.C-FZ on 2024-07-15. The IRR record shows mnt-by is MAINT-AS834. The geographical data associates this prefix with the United Arab Emirates (AE). OVH's RIPEstat data indicates that it peers with AS34927, which is the first AS in the AS path. AS16276 has AS32097 and AS52025 as its providers, which also appear in the AS path. AS16276 holds prefixes in the geolocation FR. RIPEstat indicates that AS Perwira Media in Indonesia, 211407, announces adjacent prefixes. Route object in IRR is autogen and last modified on 2025-03-14. These data suggest a possible customer-provider relation level. But the related_prefixes indicates the AS is Host Sailor Ltd, AE, 60117, which suggest an IP transfer between the two AS from economic/policy aspect. So, further information is needed to accurately establish the relationship. Thus, the likelihood of being a benign origin conflict is Medium.",
+  "possible_reason": "Traffic engineering, misconfiguration, or a temporary agreement between AS16276 and AS834. Given that AS16276 is a large provider, it's possible they are temporarily announcing the prefix on behalf of AS834 for traffic engineering purposes, or there's a customer-provider relation that is not publicly documented."
+}
+{
+  "prefix": "45.249.124.0/22",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9885, 4758]",
+  "origin_as": "AS4758",
+  "authorized_as in ROAs": "AS142502",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 45.249.124.0/22 originates from AS4758, but the ROA authorizes AS142502. RIPEstat shows that both AS4758 and AS142502 are located in India and are associated with the National Informatics Centre or National Internet Exchange of India (NIXI). The RIPEstat data indicates that AS142502 originates more specific prefixes of the announced prefix. Specifically, it originates 45.249.124.0/24. The transfer history shows 45.249.124.0/22 was transferred from NIXI/HINDSTAN to NIXI/NIXI. This suggests a possible organizational relationship. However, CAIDA does not show a direct customer-provider relationship between AS4758 and AS142502, but does show 9885 as provider of AS4758. While the geographical proximity, organizational name similarities, and the transfer history hint at a possible relationship, the missing direct AS relationship information leads to a 'Medium' benign level.",
+  "possible_reason": "The invalid announcement might be due to a misconfiguration. AS4758 may be authorized to originate a larger aggregate, but the ROA was not properly created or updated to reflect this. Alternatively, AS4758 might be acting as a backup or redundant path for AS142502 due to operational issues, leading to a temporary incorrect origination. Another possibility is traffic engineering, where AS4758 originates the prefix to influence traffic flow."
+}
+{
+  "prefix": "115.124.46.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820, 56124]",
+  "origin_as": "AS56124",
+  "authorized_as in ROAs": "AS58765",
+  "benign_level": "High",
+  "explanation": "The announcement for prefix 115.124.46.0/24 originates from AS56124, but the RPKI ROA authorizes AS58765. CAIDA indicates that AS56124 is a customer of AS45820. The RIPEstat data shows both AS56124 and AS58765 have announced 115.124.46.0/24 in the past and that both are located in India. Importantly, the RIPEstat data of the authorized AS in ROAs (AS58765) shows that it is currently announcing the prefix 115.124.46.0/24. The RIPEstat IRR data shows both AS56124 and AS58765 registered the prefix 115.124.40.0/21 and AS56124 registered the prefix 115.124.46.0/24. Furthermore, the transfer history of AS58765 shows a resource transfer from NIXI/BITTEL to NIXI/BTEL which is similar to the holder info for AS56124 and AS58765 respectively. This suggests a close relationship, and likely a mistake in ROA origination. As of July 6th, 2025, AS58765 announces the prefix 115.124.46.0/24 based on RIPEstat BGP looking glass data. The announcement timestamp is prior to this date (May 31st, 2025), but the prefix was announced by AS56124 between June 22nd and July 1st. This further strengthens the likelihood of a benign error.",
+  "possible_reason": "Possible ROA misconfiguration, where AS58765 created the ROA but intended for AS56124 to originate the prefix, or a temporary routing policy change or traffic engineering scenario where AS56124 was used to originate the prefix for a short period before the regular announcement by AS58765 resumed. A resource transfer to AS58765 could have also caused a temporary ROA misconfiguration."
+}
+{
+"prefix": "27.107.202.0/24",
+"as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+"origin_as": "AS45820",
+"authorized_as in ROAs": "AS55740",
+"benign_level": "Medium",
+"explanation": "The announcement originates from AS45820, while the ROA authorizes AS55740 to originate the prefix 27.107.202.0/24. According to RIPEstat data, AS45820 (TTSL-MEISISP) and AS55740 (TTSLMEIS-AS-AP) are both operated by Tata Teleservices. RIPEstat also shows a transfer history record that AS55740 was transferred from TATA TELESERVICES LTD -- CDMA. This suggests a possible internal restructuring or resource management within Tata Teleservices. The geographical locations of both ASes are in India. However, since there is no direct confirmation of their current relationship (e.g., customer-provider or sibling), the level is set to 'Medium'.",
+"possible_reason": "Traffic engineering or internal network management within Tata Teleservices. It's possible that AS45820 was temporarily or permanently delegated to announce this prefix due to network load balancing, maintenance, or a change in routing policy, and the ROA was not updated accordingly."
+}
+{
+  "prefix": "103.238.128.0/24",
+  "as_path": "[3549, 3356, 1299, 9498, 133296, 133296, 133296, 151106]",
+  "origin_as": "AS151106",
+  "authorized_as in ROAs": "AS138077",
+  "benign_level": "Medium",
+  "explanation": "The announcement of 103.238.128.0/24 originated from AS151106, while the ROA authorizes AS138077 to originate this prefix. The AS path contains AS133296 multiple times, which might indicate route manipulation. CAIDA data suggests AS133296 is a provider of AS151106. RIPEstat data shows AS151106 is located in India, while AS138077 is located in Indonesia. The route is RPKI invalid. Considering the provider-customer relationship, there's a possibility of a misconfiguration or temporary routing policy issue. However, the geographical distance and lack of stronger evidence keep the benign level at Medium.",
+  "possible_reason": "Possible misconfiguration in routing policies, temporary outage, or AS151106 announcing the prefix on behalf of AS138077 due to a commercial agreement without updating the ROA."
+}
+{
+  "prefix": "173.208.231.0/24",
+  "as_path": "[34927, 52025, 32097, 33387]",
+  "origin_as": "AS33387",
+  "authorized_as in ROAs": "AS32097",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route for prefix 173.208.231.0/24 originates from AS33387. The ROA authorizes AS32097 to originate 173.208.128.0/17 with a max length of 24. According to the CAIDA AS relationship data, AS32097 is a provider of AS33387. Additionally, the IHR Hegemony data shows a strong dependency (hege=1.0) of AS33387 (NOCIX) on AS32097 (WII) around the announcement timestamp. This customer-provider relationship suggests that the origin conflict is likely benign, due to a misconfiguration or a planned change that wasn't yet reflected in the ROA, or AS33387 is announcing the prefix for AS32097.",
+  "possible_reason": "Traffic engineering or temporary misconfiguration. AS33387 might be temporarily advertising the prefix on behalf of its provider AS32097 for traffic engineering purposes or due to a temporary network issue. The ROA might not have been updated yet to reflect this change or a misconfiguration happened."
+}
+{
+  "prefix": "103.159.100.0/23",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 134021, 134021, 134021, 134021]",
+  "origin_as": "AS134021",
+  "authorized_as in ROAs": "AS135758",
+  "benign_level": "High",
+  "explanation": "The announcement is RPKI invalid because AS134021 announced the prefix 103.159.100.0/23, while the ROA authorizes AS135758 to announce it, with a maximum length of /24. The CAIDA data shows that AS9583 is a provider of AS134021. The AS path contains AS9583, suggesting that AS134021 is announcing the prefix. RIPEstat indicates that AS134021 and AS135758 are both located in India and that AS135758 is announcing more specific prefixes (103.159.100.0/24, 103.159.101.0/24) of the announced prefix. Furthermore, IRR records from RIPEstat also show that AS135758 should be announcing 103.159.100.0/23 and its more specifics. Based on the presence of AS134021's provider in the path, the geographical proximity and the fact that AS135758 originates more specifics of the announced prefix and based on IRR records, it is very likely that AS134021 is announcing the prefix on behalf of AS135758, making the origin conflict benign. The multiple repetitions of AS134021 in the AS path might be due to AS path manipulation.",
+  "possible_reason": "Traffic engineering or a misconfiguration where AS134021 is incorrectly announcing the prefix on behalf of AS135758, perhaps due to a shared infrastructure or operational agreement."
+}
+{
+  "prefix": "103.127.242.0/24",
+  "as_path": "[34927, 52025, 174, 1299, 4637, 4637, 4637, 4637, 9886, 49304, 18464]",
+  "origin_as": "AS18464",
+  "authorized_as in ROAs": "AS8796, AS137535, AS395886",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 103.127.242.0/24 originated from AS18464, which is not authorized according to RPKI data. The ROAs authorize AS8796, AS137535 and AS395886. The CAIDA AS relationship data shows that AS18464 is a customer of AS49304. Also AS 49304 appears in the AS Path. This suggests that AS18464 might have a customer-provider relationship with AS49304, and AS49304 might have some kind of relation with AS137535. This provides some circumstantial evidence that the misconfiguration might be benign. However, there is no clear and direct relationship between AS18464 and any of the authorized ASes in ROAs.",
+  "possible_reason": "Operator misconfiguration, where AS18464 was incorrectly configured to originate the prefix on behalf of one of the authorized ASNs. Another possibility is a traffic engineering issue, such as accidentally announcing a more specific prefix than intended."
+}
+{
+  "prefix": "66.110.74.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 394469, 33576]",
+  "origin_as": "AS33576",
+  "authorized_as in ROAs": "AS394469",
+  "benign_level": "High",
+  "explanation": "The RPKI data indicates that AS394469 is the authorized origin for the prefix 66.110.74.0/24. However, the BGP announcement originates from AS33576. The CAIDA AS relationship data shows that AS394469 is a provider of AS33576. The RIPEstat IRR data also confirms AS394469 as the origin in IRR, but the maintenance is by AS33576, suggesting delegation. The AS path includes AS394469 before AS33576. This strong customer-provider relationship suggests that AS33576 might be announcing the prefix on behalf of AS394469, or a misconfiguration where the customer AS announces the provider's prefix. Given the time of the announcement, with AS33576 announcing the prefix currently, it is plausible that AS33576 is taking over announcement of the prefix, but the ROA hasn't been updated yet.",
+  "possible_reason": "Traffic engineering, where AS33576 begins announcing the prefix directly for more control, or a misconfiguration where the customer AS announces the provider's prefix. Also, AS33576 may be taking over announcement of the prefix from AS394469."
+}
+{
+  "prefix": "103.71.69.0/24",
+  "as_path": "[34800, 58057, 50673, 6762, 4134, 23650]",
+  "origin_as": "AS23650",
+  "authorized_as in ROAs": "AS151296",
+  "benign_level": "Medium",
+  "explanation": "The announcement 103.71.69.0/24 originated from AS23650. However, the RPKI ROA data indicates that AS151296 is the authorized origin for the covering prefix 103.71.68.0/22. The RIPEstat data shows that AS23650 is located in China, and the geolocation of the prefix 103.71.69.0/24 also points to China. Also, AS151296 is also located in China. The RIPEstat's related prefixes of the announced prefix shows the 'relationship' between 103.71.68.0/24 and 103.71.69.0/24 is 'Adjacency'. The CAIDA data indicates that AS4134 is a provider of AS23650. It is possible that AS23650 and AS151296 have some customer-provider or sibling relationship, since 103.71.68.0/22 and 103.71.69.0/24 are adjacent. However, without explicit confirmation of a direct relationship between AS23650 and AS151296, a 'Medium' level is assigned.",
+  "possible_reason": "Possible misconfiguration or a temporary routing policy change. AS23650 might be temporarily announcing the prefix due to internal routing changes or a failover scenario. Another scenario could be a mistake in ROA configuration at AS151296."
+}
+{
+  "prefix": "103.55.21.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 150620, 17439]",
+  "origin_as": "AS17439",
+  "authorized_as in ROAs": "AS150620",
+  "benign_level": "High",
+  "explanation": "The announcement for prefix 103.55.21.0/24 originates from AS17439, but the ROA authorizes AS150620 for the covering prefix 103.55.20.0/23. The AS path contains AS150620 before AS17439, suggesting AS17439 might be a customer of AS150620. The IHR Hegemony data also suggests AS17439 has a dependency on AS150620. Furthermore, the RIPEstat geolocation data places both ASes in India. The RIPEstat data confirms that the /24 prefix is also registered to AS150620. This evidence points towards a customer-provider relationship, making it highly likely a benign origin conflict.",
+  "possible_reason": "The origin AS might have been incorrectly configured on AS17439's router, or AS17439 may be announcing the prefix on behalf of AS150620 due to a business agreement or migration scenario but without proper ROA delegation."
+}
+{
+  "prefix": "103.71.71.0/24",
+  "as_path": "[34800, 58057, 50673, 6762, 4134, 23650]",
+  "origin_as": "AS23650",
+  "authorized_as in ROAs": "AS151296",
+  "benign_level": "Medium",
+  "explanation": "The announcement 103.71.71.0/24, originated by AS23650, is RPKI invalid because the ROA only authorizes AS151296 for 103.71.68.0/22 with a max length of /24. The AS path contains AS4134, which is a provider of AS23650 based on CAIDA data. Both AS23650 and AS151296 are located in China, as inferred from the RIPEstat geolocation data for AS23650 and the authorized prefix 103.71.68.0/24. The similar prefix (103.71.68.0/22) authorized by AS151296 and the geographical proximity suggests that AS151296 may be related to AS23650. However, there is no direct relationship shown in CAIDA data between AS23650 and AS151296. Therefore, the level is set to Medium.",
+  "possible_reason": "The origin AS might be misconfigured to announce the prefix, or AS23650 might be an upstream provider for a customer AS who was intended to originate the prefix but is doing so incorrectly. Traffic engineering needs may have also caused AS23650 to announce the prefix on behalf of the legitimate owner. Another possibility is that AS23650 is a subsidiary or somehow related to AS151296, and there's a configuration error leading to the invalid announcement."
+}
+{
+  "prefix": "45.127.201.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17439, 55352, 24554]",
+  "origin_as": "AS24554",
+  "authorized_as in ROAs": "AS135848",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows that AS135848 is authorized to originate prefixes within 45.127.200.0/22, including 45.127.201.0/24. However, the announcement comes from AS24554. According to CAIDA AS relationship data, AS55352 is a provider of AS24554, and AS135848 and AS24554 are both located in India, as per RIPEstat geolocation data. While there's no direct relationship between AS135848 and AS24554 according to the data provided, the fact that AS24554 is located in the same geographic region (India) as AS135848, and that it announces several prefixes within the 45.127.200.0/22 range, gives some weak circumstantial evidence that AS24554 could be related to AS135848, even though not being provider-customer relationship. This suggests a possibility of a business relationship. Therefore, a 'Medium' level is assigned.",
+  "possible_reason": "A possible reason for this conflict could be that AS24554 is a customer of AS135848 but is announcing the prefix directly due to a misconfiguration. Alternatively, AS24554 might be handling some of the prefixes on behalf of AS135848 due to traffic engineering or operational reasons but doesn't have the proper authorization configured in RPKI."
+}
+{
+  "prefix": "142.154.207.0/24",
+  "as_path": "[34927, 52025, 32097, 46450, 50079]",
+  "origin_as": "AS50079",
+  "authorized_as in ROAs": "AS46450",
+  "benign_level": "High",
+  "explanation": "The RPKI invalidity stems from AS50079 announcing the prefix 142.154.207.0/24, while the ROA authorizes AS46450 for the covering prefix 142.154.192.0/19. However, CAIDA data indicates that AS46450 is a provider of AS50079. Furthermore, IHR Hegemony data shows a dependency of AS50079 on AS46450, although the hegemony score is relatively low. The AS path also indicates that the route traversed AS46450 before reaching AS50079. Given the provider-customer relationship, it is highly likely that this is a benign origin conflict due to misconfiguration or a temporary routing policy issue.",
+  "possible_reason": "A possible reason is a misconfiguration at AS50079, where they accidentally announced a prefix that should have been announced by their provider, AS46450. This could be due to a filtering error, incorrect prefix configuration, or traffic engineering purposes."
+}
+{
+  "prefix": "203.127.225.0/24",
+  "as_path": "[34927, 52025, 32097, 29838, 40633, 4775, 17894]",
+  "origin_as": "AS17894",
+  "authorized_as in ROAs": "AS3758, AS19905",
+  "benign_level": "High",
+  "explanation": "The origin AS17894 announces the prefix 203.127.225.0/24, but it's RPKI invalid because the ROAs only authorize AS3758 and AS19905 for the 203.127.0.0/16 prefix (max length /24). However, CAIDA data indicates that AS4775 is a provider of AS17894. Also, the RIPEstat's BGP looking glass data indicates that the AS path contains AS4775 before AS17894, such as AS path '4777 4775 17894' and '4775 17894'. Given the provider-customer relationship, it is very likely that AS17894 is authorized to announce this prefix on behalf of AS4775 which is a transit AS. The prefix 203.127.225.0/24 is also announced by AS17894 in a stable manner (2025-06-22 to 2025-07-06). This supports a higher likelihood of a legitimate announcement.",
+  "possible_reason": "The announcement might be due to a misconfiguration, where AS17894, authorized to announce the prefix as a customer of AS4775, inadvertently originated the announcement itself instead of having its provider AS4775 announce it. Also, there might be a traffic engineering practice, where AS17894 tries to announce the prefix directly."
+}
+{
+  "prefix": "103.49.167.0/24",
+  "as_path": "[202365, 50673, 6453, 4755, 17762, 45194]",
+  "origin_as": "AS45194",
+  "authorized_as in ROAs": "AS153870",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 103.49.167.0/24, originating from AS45194, is RPKI invalid because it's not authorized by AS153870, according to the ROA. Examining the AS path, AS45194 is announcing the prefix, while AS153870 is the authorized origin. The AS path contains AS17762 which is a provider of AS45194. The RIPEstat data indicates that AS153870 has been announcing this prefix since 2025-06-03. Before that, based on RIPEstat data, the prefix 103.49.167.0/24 used to be announced by AS135834 since 2023-07-27. IRR record lists AS150572 as origin for the prefix. The RIPEstat also shows 103.49.166.0/24 is an adjacent prefix announced by AS150572 from 2025-06-22 to 2025-07-04, which AS45194 also announced. Given this, AS45194 might be authorized to announce the prefix, and there may be a misconfiguration or a transition in who is responsible for announcing this prefix on behalf of AS153870. This transition may not be fully completed, creating the RPKI invalidity. AS45194's geolocation is primarily in India, as is AS153870. Although we can't see the explicit business relationship between AS45194 and AS153870, we can see that they both reside in India, so it is a \"Medium\" possibility.",
+  "possible_reason": "Traffic engineering or a transition in network operations between AS45194 and AS153870, where AS45194 is taking over announcement responsibilities but the ROA hasn't been updated yet."
+}
+{
+  "prefix": "27.107.204.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 45820]",
+  "origin_as": "AS45820",
+  "authorized_as in ROAs": "AS17762",
+  "benign_level": "High",
+  "explanation": "The announcement is RPKI invalid because AS45820 is announcing 27.107.204.0/24, but the ROA for this prefix only authorizes AS17762. However, IHR Hegemony data suggests that AS45820 has a dependency on AS17762 with a relatively high hegemony score (0.3011978002546534). Furthermore, RIPEstat data shows that AS17762 is announcing a less specific prefix 27.107.0.0/16. This strongly suggests that AS45820 might be a customer or otherwise related to AS17762, making this a benign origin conflict.",
+  "possible_reason": "Traffic engineering or a temporary routing misconfiguration where AS45820 is legitimately announcing a prefix delegated to them by AS17762, but the ROA hasn't been updated yet or there exists a short-term need for AS45820 to originate the prefix."
+}
+{
+  "prefix": "62.76.74.0/23",
+  "as_path": "[17639, 7473, 41095, 51408]",
+  "origin_as": "AS51408",
+  "authorized_as in ROAs": "AS49199",
+  "benign_level": "Medium",
+  "explanation": "The announcement for 62.76.74.0/23 originates from AS51408, but the RPKI ROA authorizes AS49199 for this prefix. The RIPEstat data shows that AS49199 (RIPN) and AS51408 (SIRIUS-AS) both announce more specifics of 62.76.74.0/23 such as 62.76.74.0/24 and 62.76.75.0/24. The RIPEstat transfer history indicates resource transfers from RIPN to other ASes related to MSK-IX, but not directly to Sirius. Furthermore, AS41095 appears in the AS path, and the CAIDA data shows that AS51408 sees AS41095 as a provider. The RIPE looking glass data also shows AS51408 using AS41095 in its path. Also, both ASes are located in Russia and announce prefixes in the same address space, possibly indicating a business relationship or some form of coordination. The presence of AS41095 as a shared provider adds to the possibility of a coordinated routing policy. However, the lack of a direct confirmed relationship or resource transfer between AS49199 and AS51408 makes a determination of 'High' benign likelihood difficult. Therefore, the level is set to Medium.",
+  "possible_reason": "Traffic engineering, where AS51408 is trying to influence the path selection for traffic destined to its network. It is also possible that AS51408 has a business agreement with AS49199 to provide backup or transit services, which is not explicitly reflected in the RPKI data or AS relationship data."
+}
+{
+  "prefix": "103.168.212.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 9498, 137000]",
+  "origin_as": "AS137000",
+  "authorized_as in ROAs": "AS139490",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.168.212.0/24 originates from AS137000, while the ROA authorizes AS139490. Both ASes are located in India according to RIPEstat, increasing the likelihood of a potential relationship. The AS path includes AS9498, which appears to be a common transit AS for both AS137000 and AS139490 (seen in BGP looking glass data for AS139490). CAIDA data shows AS9498 as a provider of AS137000. The RIPEstat data indicates that AS139490 announced the prefix with a different origin (AS142459) in the past. While the evidence suggests they could be related (customer/provider or sibling), the available data isn't conclusive enough to definitively classify this as a 'High' probability of benign origin conflict. Thus, a 'Medium' level is more appropriate.",
+  "possible_reason": "The origin AS, AS137000, might be a customer of AS139490 or a related entity. The invalid announcement could be due to a misconfiguration or a temporary routing policy change, such as traffic engineering, where AS137000 was briefly used as the origin for the prefix. Another possibility is that AS137000 is providing backup connectivity for the prefix."
+}
+{
+  "prefix": "45.146.80.0/24",
+  "as_path": "[34927, 52025, 64289, 16276]",
+  "origin_as": "AS16276",
+  "authorized_as in ROAs": "AS60117",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data shows that AS60117 is the authorized origin for the prefix 45.146.80.0/24, but the BGP update originates from AS16276. This makes the route RPKI-invalid. According to CAIDA data, AS16276 is a peer of AS34927 and AS52025, AS52025 is a provider of AS16276. The IRR records also show a route object for this prefix originated by AS20473 which could introduce some routing errors. RIPEstat data shows that the prefix is geolocated to Lithuania (LT) and the origin AS in the BGP update, AS16276 (OVH), announces prefixes in multiple locations, including France. The ROA authorized AS, AS60117(Host Sailor Ltd), is also located in Lithuania. The IRR records contains two route objects with origin 60117, created at 2025-06-03T08:24:22Z by netutils-mnt. The AS path shows that AS16276 is relatively close to AS60117 in terms of AS hops. Additionally, there is an IRR record that shows that 20473 also originates the prefix but its last modified in 2023 which is outdated. Thus, there is a possible but unconfirmed relationship between AS16276 and AS60117 so the route is 'Medium'.",
+  "possible_reason": "The invalid announcement from AS16276 might be due to a misconfiguration within OVH (AS16276), especially considering their large scale and the variety of prefixes they announce. It could also be related to a business agreement with AS60117 for backup routing or traffic engineering that was not properly configured regarding RPKI."
+}
+{
+  "prefix": "45.127.200.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17439, 55352, 24554]",
+  "origin_as": "AS24554",
+  "authorized_as in ROAs": "AS135848",
+  "benign_level": "Medium",
+  "explanation": "The announcement 45.127.200.0/24 originated from AS24554, while the ROA authorizes AS135848 for 45.127.200.0/22. According to CAIDA AS relationship data, AS55352 is a provider of AS24554. The geolocation data for both AS24554 and AS135848 indicates they are located in India. The prefix 45.127.200.0/24 is also located in India. Although these two ASes are in the same country and share geographical proximity, and the origin AS is announcing a /24 while the ROA has a /22 maxLength of /24, there is no direct evidence of a customer-provider or peer relationship between AS24554 and AS135848. Further investigation is needed to confirm the relationship between AS24554 and AS135848. Therefore, a medium level is assigned.",
+  "possible_reason": "The origin AS (AS24554) may have been authorized to announce the prefix 45.127.200.0/24 by AS135848 but lacks a corresponding ROA. This could be due to an incomplete or outdated ROA, a temporary agreement, or misconfiguration on the side of either AS. Also, traffic engineering or load balancing might be a possible reason."
+}
+{
+  "prefix": "103.173.214.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 9498, 137000]",
+  "origin_as": "AS137000",
+  "authorized_as in ROAs": "AS139490",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.173.214.0/24 originated from AS137000, while the ROA authorizes AS139490 to originate this prefix.  Both AS137000 ('VIJAYALAKSHMI NET SERVICES PVT LTD') and AS139490 ('Aspt Networks Pvt Ltd') are located in India and registered with APNIC. The AS path includes AS9498, which is upstream of AS137000 according to CAIDA data. RIPEstat data reveals AS139490 also peers with AS9498. This suggests AS9498 could be a common provider. Given the shared geographical location (India) and the likely reliance on a common upstream provider (AS9498), there is a moderate chance of a benign relationship or misconfiguration. The irr record points to AS142459 which is a customer of AS137000. While 137000 is announcing the prefix, the IRR record showing 142459 as origin indicates a potential issue with delegation or filtering. Also, the prefix 103.173.214.0/24 is announced by AS139490 according to RIPEstat's prefix overview.",
+  "possible_reason": "The RPKI invalidity could be due to a misconfiguration in which AS137000 is inadvertently announcing the prefix on behalf of, or in addition to, AS139490. Alternatively, AS137000 might be a backup or redundant AS for AS139490, but the ROA has not been updated to reflect this. Another possibility is traffic engineering, where AS137000 is temporarily announcing the prefix to influence traffic flow, however, this is less likely given the strict origin validation context of RPKI."
+}
+{
+  "prefix": "103.172.58.0/23",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17439, 150596, 135799]",
+  "origin_as": "AS135799",
+  "authorized_as in ROAs": "AS151713",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.172.58.0/23 originates from AS135799, while the ROA authorizes AS151713. This is an RPKI invalid announcement. The RIPEstat data shows that AS151713 announced this prefix from 2024-08-30 to 2025-04-30.  The IRR records also indicate AS151713 as the origin. The routing status shows AS135799 announces this prefix at the last seen time. CAIDA shows that AS135799 has AS4755 and AS150596 as providers. The AS path shows AS135799 peers with AS150596. Further, AS151713 and AS135799 are both located in India. There isn't enough evidence to conclude a definite customer-provider relationship between AS135799 and AS151713. The origin AS changed from AS151713 to AS135799, so it is a possible misconfiguration or a planned change that was not updated in the ROA. Since both are located in India, there's a moderate possibility of a business relationship or coordination, but without more evidence, it's difficult to be certain. The fact that AS151713 previously announced the prefix lends some credence to a possible business arrangement.",
+  "possible_reason": "Possible misconfiguration or a planned change of origin AS without updating the ROA. Alternatively, traffic engineering where AS135799 is now handling traffic for a segment previously managed by AS151713."
+}
+{
+  "prefix": "110.232.255.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 134319, 134319, 134319, 134319, 134319]",
+  "origin_as": "AS134319",
+  "authorized_as in ROAs": "AS45232",
+  "benign_level": "High",
+  "explanation": "The announced prefix 110.232.255.0/24 is covered by the ROA that authorizes AS45232 to originate 110.232.248.0/21 with a maximum length of /24. However, the announcement originates from AS134319. According to RIPEstat, both AS134319 ('ELYZIUM-AS Elyzium Technologies Pvt. Ltd.') and AS45232 ('SISPL-AS-AP Spacenet Internet Services Pvt. Ltd.') are located in India. RIPEstat's IRR data shows that AS45232 has a route object for 110.232.255.0/24. The CAIDA data shows AS134319 has AS4755 as one of its providers. AS path contains 4755 before AS134319. This is an indication that AS134319 is likely announcing its provider's prefix, which could be the result of a customer-provider relationship misconfiguration. Therefore, the likelihood of this being a benign origin conflict is high.",
+  "possible_reason": "The most likely reason is a misconfiguration where AS134319, a customer of AS45232 or one of its upstream providers, is incorrectly announcing the prefix. This could also be intentional, for example, traffic engineering or backup routing if AS134319 had permission to announce this prefix, but this was not correctly reflected in RPKI records. Also, it may be an intentional hijacking."
+}
+{
+  "prefix": "123.231.206.0/24",
+  "as_path": "[17639, 7473, 4800, 133841]",
+  "origin_as": "AS133841",
+  "authorized_as in ROAs": "AS4800",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 123.231.206.0/24 is announced by AS133841, but the ROA only authorizes AS4800. However, CAIDA data indicates that AS4800 is a provider of AS133841. IHR Hegemony data also confirms this customer-provider relationship with a hege value of 1.0. Furthermore, both ASes are located in Indonesia, suggesting a close geographical and economic relationship. RIPEstat shows that AS4800 also announces 123.231.205.0/24 which is a sibling prefix of the announced prefix.",
+  "possible_reason": "The origin AS might be configured incorrectly. AS133841 might be announcing the prefix on behalf of its provider, AS4800, or there may be a misconfiguration where AS133841 is meant to originate a more specific prefix covered by AS4800's ROA. Also, the announced prefix may be a traffic engineering. AS4800 may use AS133841 to announce the prefix. "
+}
+{
+  "prefix": "103.71.70.0/24",
+  "as_path": "[34800, 58057, 50673, 6762, 4134, 23650]",
+  "origin_as": "AS23650",
+  "authorized_as in ROAs": "AS151296",
+  "benign_level": "Medium",
+  "explanation": "The announcement 103.71.70.0/24 originated from AS23650, while the ROA authorizes AS151296 for 103.71.68.0/22 with a maximum length of 24. This means AS23650 is not authorized to originate this prefix. According to CAIDA data, AS4134 is a provider of AS23650. Also, the RIPEstat data shows that both AS23650 and AS151296 are located in China. Moreover, they both announce prefixes within the 103.71.0.0/16 range, indicating they are likely operating within the same region and possibly providing similar services. The relationship between AS23650 and AS151296 is not directly known, but given their presence in China and AS23650 announcing adjacent prefixes, there is a chance that AS23650 could be a customer or partner of AS151296, even though there is no direct customer or provider relationship can be confirmed from the data. Thus, the invalid announcement is likely to be benign.",
+  "possible_reason": "The origin AS might have misconfigured the announcement due to customer request or a mistake in prefix filtering. Alternatively, AS23650 could be providing backup connectivity for AS151296 customers or partners, and this announcement represents a temporary or failover route."
+}
+{
+  "prefix": "103.196.133.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 17439, 55352, 24554]",
+  "origin_as": "AS24554",
+  "authorized_as in ROAs": "AS135848",
+  "benign_level": "Medium",
+  "explanation": "The announcement for prefix 103.196.133.0/24 originates from AS24554, but the ROA authorizes AS135848 for the broader prefix 103.196.132.0/22 with a maximum length of /24.  CAIDA data indicates that AS55352 is a provider of AS24554. Additionally, geolocation data shows that both AS24554 and AS135848 operate within India. This geographic proximity and the provider-customer relationship hints at a potential, but unconfirmed, benign relationship or misconfiguration.",
+  "possible_reason": "A possible reason for the RPKI invalidity could be a misconfiguration where AS24554 is announcing a more specific prefix (103.196.133.0/24) that should have been included under AS135848's ROA (103.196.132.0/22). Alternatively, AS24554 might be a customer of AS135848 and is announcing the prefix on their behalf without proper authorization via ROA. Another possibility is a traffic engineering setup where AS24554 is temporarily announcing the prefix."
+}
+{
+  "prefix": "103.239.170.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 55352, 55352, 55352, 55352, 55352, 55352, 133001]",
+  "origin_as": "AS133001",
+  "authorized_as in ROAs": "AS153271",
+  "benign_level": "Medium",
+  "explanation": "The RPKI data indicates that AS153271 is authorized to originate the 103.239.168.0/22 prefix with a maximum length of /24. However, AS133001 is originating 103.239.170.0/24. The geolocation data suggests both AS133001 and AS153271 are located in India. The AS path shows AS55352 appearing multiple times, potentially indicating path manipulation or internal structure within an AS. CAIDA data shows AS55352 is a provider of AS133001. It is possible AS153271 is a customer of AS55352 and AS133001 is also related to AS55352 in some way, but there is no direct evidence in the provided data. Therefore, the level is assigned as Medium.",
+  "possible_reason": "Traffic engineering, misconfiguration by either AS133001 or AS153271, or a business agreement where AS133001 is announcing on behalf of AS153271 but the ROA hasn't been updated to reflect this."
+}
+{
+  "prefix": "1.6.219.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 137130]",
+  "origin_as": "AS137130",
+  "authorized_as in ROAs": "AS9583",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 1.6.219.0/24 announced by AS137130 is RPKI invalid because there is a ROA for this prefix or a more general prefix (1.6.216.0/22) with a max length of 24, which only authorizes AS9583 to originate the prefix. However, considering the AS relationship data from CAIDA, AS137130 is a customer of AS9583. Furthermore, the IHR Hegemony data also indicates that there's a dependency between AS137130 and AS9583 around the announcement time. The RIPEstat data also confirms that AS137130 has been announcing the prefix since 2019. The relationship between AS137130 and AS9583 is a customer-provider relation, thus, the possibility that it is benign is high.",
+  "possible_reason": "The origin AS might be allowed to originate the prefix as a part of specific agreement with the authorized AS, or traffic engineering."
+}
+{
+  "prefix": "1.7.205.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 9583, 140202]",
+  "origin_as": "AS140202",
+  "authorized_as in ROAs": "AS9583",
+  "benign_level": "High",
+  "explanation": "The RPKI invalid route 1.7.205.0/24 is originated by AS140202, while the ROA authorizes AS9583 for 1.7.204.0/22 with max length /24. AS140202 has a customer relationship with AS9583 based on CAIDA data (AS9583 is a provider of AS140202). The IHR Hegemony data also suggests that AS140202 is dependent on AS9583. Moreover, both ASes are located in India. This strong customer-provider relationship and geographical proximity suggests a high likelihood of a benign origin conflict.",
+  "possible_reason": "The origin AS might have been misconfigured, or AS140202 could be advertising the prefix on behalf of its provider AS9583 due to a traffic engineering agreement or a planned future transfer of the prefix ownership. A temporary misconfiguration leading to incorrect origin AS could also be the reason."
+}
+{
+  "prefix": "142.154.208.0/24",
+  "as_path": "[34927, 52025, 32097, 29838]",
+  "origin_as": "AS29838",
+  "authorized_as in ROAs": "AS46450",
+  "benign_level": "Medium",
+  "explanation": "The route is RPKI invalid as AS29838 is announcing 142.154.208.0/24, while the ROA only authorizes AS46450 for the 142.154.192.0/19 prefix with a max length of 24. The RIPEstat data shows the announced prefix geolocates to the US. The CAIDA data indicates that AS34927 (the upstream of AS29838 in the announcement AS path) is a peer of AS46450. Also, the RIPEstat data shows that AS46450 announces the less specific prefix 142.154.192.0/19. The ARIN transfer history shows the delegation date of the recipient resource 142.154.192.0/19 is 1992-07-23 and the transfer time is 2016-05-09T19:11:12Z, and the recipient holder name is Pilot Fiber, Inc.. These factors considered together suggest a possible customer-provider or sibling relationship between the two ASes, thus increasing the likelihood of a benign origin conflict.",
+  "possible_reason": "Traffic engineering: AS29838 might be using the prefix to attract traffic, and AS46450 might be aware or unaware of this action. Misconfiguration: There could be a misconfiguration at either AS29838 or AS46450, leading to the incorrect announcement. Accidental Leak: AS29838 might be accidentally leaking the prefix."
+}
+{
+  "prefix": "103.99.67.0/24",
+  "as_path": "[45049, 6696, 6762, 6453, 4755, 15830, 137083, 137083, 137083, 137083, 140148, 140148]",
+  "origin_as": "AS140148",
+  "authorized_as in ROAs": "AS150086",
+  "benign_level": "High",
+  "explanation": "The announcement for prefix 103.99.67.0/24 originates from AS140148, while the ROA authorizes AS150086. The CAIDA data indicates that AS140148 has AS137083 as a provider. The AS path also confirms that AS140148 is downstream of AS137083. RIPEstat shows that AS140148 announces the prefix 103.99.67.0/24, and the holder of AS140148 is Pegasuswave Private Limited. Critically, the RIPEstat data also reveals that AS150086 announced the prefix 103.99.66.0/24 until 2024-08-24. Additionally, the geolocation data suggests both ASes are operating in India. This close geographical proximity and history of similar prefix announcements strongly suggest a customer-provider or other close business relationship that would justify the route despite the RPKI invalidity. The multiple repetitions of AS137083 and AS140148 in the AS path may also indicate AS path manipulation for traffic engineering purposes. The discrepancy in origin AS between the announcement and the ROA is therefore likely a benign misconfiguration or traffic engineering decision.",
+  "possible_reason": "Traffic engineering or a misconfiguration in BGP announcements by either AS140148 or AS150086. It is possible that AS140148 is supposed to announce the prefix on behalf of AS150086, but the ROA was not correctly updated to reflect this arrangement."
+}
