@@ -11,7 +11,7 @@ from extract_json import extract_origin_conflict_routes
 
 
 
-TOGETHER_API_KEY = "tgp_v1_8Y3DAJ-NGohHEvtH2rgCu6j5rSeGU6-Da84EQs6BKtM"
+TOGETHER_API_KEY = "############################################"
 TOGETHER_URL = "https://api.together.xyz/v1/chat/completions"
 
 
