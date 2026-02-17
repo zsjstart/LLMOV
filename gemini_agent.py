@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 
-genai.configure(api_key="AIzaSyDCsnw9YNZJCcajDqAe5PND3Y-ZEn1ib70")
+genai.configure(api_key="#################")
 
 
 def analyze_with_gemini(context, query):
