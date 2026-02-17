@@ -130,11 +130,11 @@ def query_together(prompt):
 
 '''
 prefix = "8.8.8.0/24"
-html = fetch_ripestat_html(prefix)
-prompt = build_prompt(html, prefix)
-response = query_together(prompt)
-print(response)
+html = fetch_ripestat_prefix_html(prefix)
+print(html)
 '''
+
+
 
 
 

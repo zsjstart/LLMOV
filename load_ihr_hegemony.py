@@ -20,16 +20,19 @@ def get_heg_dependency(originasn, asns, timestr):
     
     #heg_time = '2025-05-31T21:15'
     hege = Hegemony(originasns=[originasn], asns = asns, start=heg_time, end=heg_time)
+    
     hege_data = []
     if list(hege.get_results()):
         hege_data = list(hege.get_results())[0]
     return hege_data
     
-'''      
-timestr = '2025-05-30 22:06:16'
-hege_data = get_heg_dependency(23923, [139026], timestr)
+'''
+timestr = '2025-11-05 22:06:16'
+hege_data = get_heg_dependency(60458, [204384], timestr)
 print(hege_data)
 '''
+
+
 
 
 

@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 
-genai.configure(api_key="AIzaSyDVxe7aUwYaLaUCe4MWLnl4DoQjA8uAroo")
+genai.configure(api_key="AIzaSyDCsnw9YNZJCcajDqAe5PND3Y-ZEn1ib70")
 
 
 def analyze_with_gemini(context, query):
@@ -18,8 +18,8 @@ Answer:
 """
 
     # Step 3: Load model
-    model = genai.GenerativeModel("models/gemini-2.0-flash") 
-
+    model = genai.GenerativeModel("models/gemini-2.0-flash")
+    
     # Step 4: Generate response
     response = model.generate_content(template)
 

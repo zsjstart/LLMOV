@@ -18,6 +18,7 @@ def download_caida_data(save_dir="data/caida"):
     os.makedirs(save_dir, exist_ok=True)
 
     url, filename = get_latest_caida_url()
+    url = f"https://data.caida.org/datasets/as-relationships/serial-2/20250901.as-rel2.txt.bz2"
     save_path = os.path.join(save_dir, filename)
 
     print(f"📥 Downloading from: {url}")
@@ -129,8 +130,8 @@ def get_caida_rels(asn, all_relationships):
     
 
 if __name__ == "__main__":
-    #file = download_caida_data()
-    #load_data_into_sqlite(file)
+    file = download_caida_data()
+    load_data_into_sqlite(file)
     # Example usage
     rel = get_relationship(15169, 3356)
     if rel == -1:
