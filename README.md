@@ -1,2 +1,3 @@
 # LLMOV
-We introduce a new tool, LLMOV, to address benign conflicts by leveraging large language models (LLMs) to automatically assess RPKI-invalid routes and estimate the likelihood that they are benign.
+We introduces LLMOV, a novel tool that leverages large language models (LLMs) to automatically analyze and explain RPKI-invalid routes, with a particular focus on benign conflicts.
+LLMOV assigns a likelihood level—Low, Medium, or High—indicating the probability that an invalid route is benign, based on the relationship between the origin AS and the authorized AS in the corresponding ROA. It also identifies potential root causes of benign conflicts to support mitigation at the source. We evaluate LLMOV on 100 real-world RPKI-invalid routes and show that it outperforms the state-of-the-art approach, especially in complex or ambiguous cases where no explicit evidence of a close AS relationship is available.
