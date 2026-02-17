@@ -93,7 +93,15 @@ def get_bgp_updates_with_specific_timeslot(prefix=None):
             })
             
     return updates
-    
+
+def parse_as_path(as_path_str):
+    asns = []
+    for token in as_path_str.strip().split():
+        # remove braces and parentheses
+        token = token.strip("{}()")
+        if token.isdigit():
+            asns.append(int(token))
+    return asns
 
 
 def get_bgp_updates(prefix=None, duration=300):
@@ -102,11 +110,14 @@ def get_bgp_updates(prefix=None, duration=300):
 
     start_str = datetime.fromtimestamp(start_time, tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
     end_str = datetime.fromtimestamp(now, tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
-
+    
+    #BGP collectors like RouteViews EQIX (route-views.eqix) or RouteViews SG (route-views.sg) peer with hundreds of ASes globally.
     stream = pybgpstream.BGPStream(
         from_time=start_str,
         until_time=end_str,
-        record_type="updates"
+        collector = "route-views.eqix", 
+        record_type="ribs",
+ 
     )
 
     if prefix:
@@ -114,8 +125,9 @@ def get_bgp_updates(prefix=None, duration=300):
 
     
     elems = defaultdict(list)
+    checked_prefix_origins = set()
     for elem in stream:
-        print("Update: ", elem)
+        
         try:
             record_prefix = elem.fields.get("prefix", "")
             if not record_prefix or ipaddress.ip_network(record_prefix).version == 6:
@@ -124,11 +136,18 @@ def get_bgp_updates(prefix=None, duration=300):
             continue
             
         as_path_str = elem.fields.get("as-path", "")
-        as_path = list(map(int, as_path_str.strip().split()))
+        #as_path = list(map(int, as_path_str.strip().split()))
+        as_path = parse_as_path(elem.fields["as-path"])
+        origin = as_path[-1]
+        if (record_prefix, origin) in checked_prefix_origins: continue
+        
+        
+        
         timestamp = datetime.utcfromtimestamp(elem.time).strftime('%Y-%m-%d %H:%M:%S')
         elems[(record_prefix, tuple(as_path))].append(timestamp)
+        checked_prefix_origins.add((record_prefix, origin))
         
-        
+   
     updates = []
     for item in elems:
         updates.append({
@@ -191,7 +210,47 @@ def is_valley_path(as_path, as_relationships):
 	return False  # No valleys detected
     
 
+#start from this function, extract RPKI invalid routes....
+def monitor_bgp_02(prefix: str, user_query: str, interval=300):
+        
+        updates = None
+        
+        try:
+            updates = get_bgp_updates(prefix=prefix, duration=interval)
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to fetch updates: {e}")
+            
+        invalid_updates = []
+        if updates:
+        	
+            for upd in updates:
+            
+                #rpki_status = get_rpki_status(upd["prefix"], upd["origin_as"])
+                rpki_data = validate_prefix_asn(upd["prefix"], upd["origin_as"])
+                
+                if rpki_data.get("validated_route", {}).get("validity", {}).get("state", "unknown") == "invalid":
+                    invalid_updates.append(upd)
+                    #if rpki_data.get("validated_route", {}).get("validity", {}).get('description', '') == 'At least one VRP Covers the Route Prefix, but no VRP ASN matches the route origin ASN':
+                        
+                       
+                        
+            #response = analyze_bgp(updates, prefix, user_query)
+            #print("Response: ", response)
+            
+        else:
+            print("[INFO] No BGP updates found in the last 5 minutes.")
+        
+        
+        #Save the list to a JSON file
+        with open("invalid_routes_list_large_new.json", "w") as file:
+            json.dump(invalid_updates, file)
 
+def count_invalid_updates():
+    with open("invalid_routes_list_large_new.json", "r") as f:
+        data = json.load(f)
+    print(len(data))
+    
 def monitor_bgp(prefix: str, user_query: str, interval=300):
     print("[INFO] Starting BGP monitoring loop (interval: 5 minutes)...")
     num = 0
@@ -223,9 +282,7 @@ def monitor_bgp(prefix: str, user_query: str, interval=300):
         #except Exception as e:
         #    print(f"[ERROR] Failed to fetch updates: {e}")
         
-        #Save the list to a JSON file
-        with open("invalid_routes_list_large.json", "w") as file:
-            json.dump(invalid_updates, file)
+        
             
         elapsed = time.time() - loop_start
         
@@ -241,7 +298,9 @@ if __name__ == "__main__":
     #prefix="103.158.6.0/24"
     prefix = None
     user_query = "Can you analyze these BGP updates?"
-    monitor_bgp(prefix, user_query, interval=3600)
+    #get_bgp_updates(prefix, duration=3600*2)
+    #monitor_bgp_02(prefix, user_query, interval=3600*2)
+    #count_invalid_updates()
     
     '''
     as_relationships = get_relationship_dict()

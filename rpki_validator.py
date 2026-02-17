@@ -23,10 +23,17 @@ def validate_prefix_asn(prefix, origin_as):
 
 def extract_roa_asns(res):
     asns = set()
+    
+    # in cases of conflicting origins
     vrps = res.get("validated_route", {}).get("validity", {}).get("VRPs", {}).get("unmatched_as", [])
+    if len(vrps) == 0:
+        #in cases of conflicting lengths
+        vrps = res.get("validated_route", {}).get("validity", {}).get("VRPs", {}).get("unmatched_length", [])
+        return res, asns
+ 
     for vrp in vrps:
         asns.add(''.join(filter(str.isdigit, vrp['asn'])))
-    return vrps, asns
+    return res, asns
     
 
 
@@ -37,6 +44,7 @@ origin_as = "15169"
 response = validate_prefix_asn(prefix, origin_as)
 print(response)
 '''
+
 
 
 
