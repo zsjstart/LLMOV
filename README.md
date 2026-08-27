@@ -13,33 +13,30 @@ For each RPKI-invalid route, LLMOV assigns a **benign likelihood level** (`Low` 
 ## Architecture
 
 ```mermaid
-flowchart TD
-    A["RPKI-invalid BGP route<br/>(prefix, origin_AS, timestamp)"] --> CTX
+flowchart LR
+    A(["🌐 RPKI-invalid<br/>BGP routes"]) --> B["🔎 Context collection<br/>RPKI · CAIDA · RIPEstat"]
 
-    subgraph CTX["Context collection (per route)"]
-        direction LR
-        B1["RPKI Validator<br/>rpki_validator.py<br/>Routinator API :8323"]
-        B2["CAIDA AS relationships<br/>get_caida_data.py / as_relationship.py<br/>caida.db"]
-        B3["RIPEstat data<br/>process_htmls.py<br/>preload_RIPEstat_data.py cache"]
-        B4["IHR Hegemony (optional, currently disabled)<br/>load_ihr_hegemony.py"]
-    end
+    B --> C1["🤖 DeepSeek"]
+    B --> C2["🤖 Nemotron"]
+    B --> C3["🤖 Qwen"]
 
-    CTX --> PROMPT["Shared BGP-analyst prompt + context"]
+    C1 --> D{{"⚖️ Judge<br/>gpt-oss-120b"}}
+    C2 --> D
+    C3 --> D
 
-    PROMPT --> D1["llm_classifier_deepseek.py<br/>deepseek-ai/DeepSeek-R1-Distill-Llama-70B"]
-    PROMPT --> D2["llm_classifier_nvidia.py<br/>nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"]
-    PROMPT --> D3["llm_classifier_qwen.py<br/>Qwen/Qwen2.5-72B-Instruct"]
+    D --> E(["✅ Benign-conflict<br/>verdict"])
 
-    D1 --> E1[("deepseek-ai_reasoning_*.txt")]
-    D2 --> E2[("nvidia_reasoning_*.txt")]
-    D3 --> E3[("qwen_reasoning_*.txt")]
+    classDef input fill:#e8f0fe,stroke:#4285f4,stroke-width:2px,color:#1a1a1a;
+    classDef context fill:#fef7e0,stroke:#f9ab00,stroke-width:2px,color:#1a1a1a;
+    classDef model fill:#e6f4ea,stroke:#34a853,stroke-width:2px,color:#1a1a1a;
+    classDef judge fill:#fce8e6,stroke:#ea4335,stroke-width:2px,color:#1a1a1a;
+    classDef output fill:#f3e8fd,stroke:#a142f4,stroke-width:2px,color:#1a1a1a;
 
-    E1 --> F["llm_aggregator.py<br/>group by (prefix, origin_AS)"]
-    E2 --> F
-    E3 --> F
-
-    F --> G["Judge LLM<br/>openai/gpt-oss-120b"]
-    G --> H[("aggregated_output.csv<br/>benign_level, explanation,<br/>possible_reason, factors, justification")]
+    class A input;
+    class B context;
+    class C1,C2,C3 model;
+    class D judge;
+    class E output;
 ```
 
 ## Repository structure
