@@ -13,6 +13,7 @@ For each RPKI-invalid route, LLMOV assigns a **benign likelihood level** (`Low` 
 ## Architecture
 
 ```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 70, "rankSpacing": 100, "padding": 20}, "themeVariables": {"fontSize": "20px"}}}%%
 flowchart LR
     A(["🌐 RPKI-invalid<br/>BGP routes"]) --> B["🔎 Context collection<br/>RPKI · CAIDA · RIPEstat"]
 
