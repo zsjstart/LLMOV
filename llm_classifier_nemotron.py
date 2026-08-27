@@ -3,80 +3,14 @@ from process_htmls import fetch_ripestat_prefix_html, fetch_ripestat_asn_html, b
 import json
 from get_caida_data import get_relationship, get_relationship_dict, get_caida_rels
 from rpki_validator import validate_prefix_asn, extract_roa_asns
-#from ollama_agent import analyze_with_ollama_model
 from nemotron_agent import analyze_with_ChatOpenAI_model
-import pickle
 from datetime import datetime
 import os
-import json
 import csv
 import shaman_data_process_lib
 import as_relationship
 from preload_RIPEstat_data import _load_json, _save_json
 from fix_json_str import extract_and_fix_json
-
-#from extract_json import extract_origin_conflict_routes
-
-
-
-TOGETHER_API_KEY = "####"
-TOGETHER_URL = "https://api.together.xyz/v1/chat/completions"
-
-
-
-
-def analyze_with_together(context, query):
-    template = f"""
-You are a BGP routing analyst. Use the following context to address the tasks:
-
-Context:
-{context}
-
-Tasks:
-{query}
-
-Answer:
-"""
-
-    payload = {
-        #"model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
-        
-        "model": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
-        "temperature": 0.6,
-        "messages": [
-            {"role": "user", "content": template}
-        ]
-    }
-    
-    
-    headers = {
-        "Authorization": f"Bearer {TOGETHER_API_KEY}",
-        "Content-Type": "application/json"
-    }
-
-    response = requests.post(TOGETHER_URL, headers=headers, json=payload)
-    response_json = response.json()
-    
-    if "choices" in response_json:
-        return response_json["choices"][0]["message"]["content"]
-    else:
-        print("Error or unexpected responses!")
-        return response_json
-
-def examine_invalid_routes():
-    origin_conflicting_routes = list()
-    with open("invalid_routes_list_large_new.json", "r") as file:
-        invalid_routes = json.load(file)
-        for route in invalid_routes:
-            prefix = route['prefix']
-            origin_asn = route['origin_as']
-            rpki_data = validate_prefix_asn(prefix, origin_asn)
-            
-            if rpki_data.get("validated_route", {}).get("validity", {}).get("state", "unknown") == "invalid":
-            #if rpki_data.get("validated_route", {}).get("validity", {}).get('description', '') == 'At least one VRP Covers the Route Prefix, but no VRP ASN matches the route origin ASN':
-                origin_conflicting_routes.append(route)
-                
-    return origin_conflicting_routes
 
 
 # Step 2: function to append a JSON object
@@ -94,17 +28,14 @@ def write_json_to_csv(json_obj, csv_file, fieldnames=None):
 
     
     
-def together_agent():
+def run_classifier():
     #{'timestamp': '2025-05-31 00:35:01', 'prefix': '41.87.31.0/24', 'as_path': (49673, 3216, 6453, 6762, 30844, 36969), 'origin_as': 36969}
     #Possible as path manipulation: [49673, 20485, 6762, 17494, 150748, 150748, 139026, 23923, 23923] 23923 is announcing a prefix authorized by 139026.
     
     #when using shaman's data:
     data_file = "./shaman/real_hijacks_2024.csv"
     origin_conflicting_routes = shaman_data_process_lib.extract_invalid_routes(data_file)
-    
-    
-    #Otherwise:
-    #origin_conflicting_routes = examine_invalid_routes()
+
     label = "Nemotron"
     model_name = "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
 
@@ -239,6 +170,7 @@ Consider factors such as economic, policy distance or geographical distance betw
                  
                   Rules:
                 - Select the most plausible factor(s) based on provided data and known operational practices.
+                - Use "Others" only if no category fits. If used, optionally suggest a new category.
                 - External operational knowledge may be used.
                 - If AS_path is not available; please do not consider it and assign "N/A" in the output.
                 - Respond ONLY with a valid JSON format.
@@ -263,12 +195,6 @@ Consider factors such as economic, policy distance or geographical distance betw
             
             #in some case, I did see the origin as is a customer of a major upstream (like a tier1 as)
 
-            #response = analyze_with_together(Context, query)
-            #print(response)
-            
-            #model_name = "gemma3:27b"
-            #response = analyze_with_ollama_model(model_name, Context, query)
-            
             response = analyze_with_ChatOpenAI_model(model_name, Context, query)
             # fix json string
             json_response = extract_and_fix_json(response)
@@ -285,7 +211,7 @@ Consider factors such as economic, policy distance or geographical distance betw
             '''
             
         except Exception as e:
-            print(f"[ERROR] Failed to qwen reasoning: {e}; {response}")
+            print(f"[ERROR] Failed to nemotron reasoning: {e}; {response}")
         
         
         
@@ -293,36 +219,6 @@ Consider factors such as economic, policy distance or geographical distance betw
     
 
 if __name__ == "__main__":
-    
-    #print(len(examine_invalid_routes()))
-    together_agent()
-    
-    #Context = extract_origin_conflict_routes()
-    #print(len(Context))
-    query = '''
-    please classify the RPKI-invalid routes included in the Context based on possible root causes. RPKI-invalid routes described individually.
-
-Each route entry includes fields such as:
-
-    prefix
-
-    origin_as
-
-    authorized_as in ROAs
-
-    explanation
-
-    possible_reason. 
-    
-    
-How many routes are there in total? Please answer how many routes involve customer-provider relationship, how many involve the same organizations, how many involve AS dependency, how many involve Transfer/Ownership changes. If a route falls into multiple categores, the counts should be non-exclusive. How many involve traffic engineering?
-    
-    
-    '''
-    #response = analyze_with_together(Context, query)
-    #print(response)
-  
-    
-
+    run_classifier()
 
 

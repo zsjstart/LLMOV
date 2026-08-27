@@ -42,6 +42,7 @@ takes the median benign_level per route.
 import argparse
 import csv
 import logging
+import re
 from pathlib import Path
 from typing import Any
 
@@ -69,14 +70,28 @@ def load_csv_file(path: str) -> list[dict]:
     return rows
 
 
+def _normalize_asn(raw: str) -> str:
+    """Normalize an origin_AS value to a canonical "ASxxxx" form.
+
+    The three classifiers don't always format this field the same way for
+    the same route — "AS134990", "134990", and "AS214432 (ZLIDC - Zhilian
+    Technology CO., LTD.)" have all been observed for what is otherwise the
+    same announcement. Without normalizing, these fragment into separate
+    join keys and the route gets silently split across "only 1 of 3" /
+    "only 2 of 3" buckets instead of being aggregated together.
+    """
+    match = re.search(r"\d+", raw or "")
+    return f"AS{match.group()}" if match else raw.strip()
+
+
 def index_by_prefix(entries: list[dict]) -> dict[tuple[str, str], dict]:
-    """Return a dict keyed by (prefix, origin_AS).
+    """Return a dict keyed by (prefix, normalized origin_AS).
 
     Keying by prefix alone silently drops distinct events: the same prefix
     can be hijacked/misannounced by different origin ASes at different
     times, and each such row would otherwise overwrite the previous one.
     """
-    return {(e["prefix"], e["origin_AS"]): e for e in entries}
+    return {(e["prefix"], _normalize_asn(e["origin_AS"])): e for e in entries}
 
 
 def _union_factors(entries: list[dict]) -> list[str]:
