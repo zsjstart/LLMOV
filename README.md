@@ -117,9 +117,4 @@ Each classifier emits, per route:
 ```
 
 The aggregator adds one field, `justification` — a short label such as `same organization`, `strong relationship`, or `no relationship` — to the same schema.
-
-## Known limitations
-
-- The aggregator groups verdicts by `(prefix, origin_AS)`. If the same `(prefix, origin_AS)` pair is re-announced at different times, the classifier CSVs currently have no timestamp column to distinguish those events, so they'd be treated as one.
-- `caida.db` (~59 MB) is committed directly to the repo, above GitHub's 50 MB soft warning threshold. Consider Git LFS, or regenerating it locally via `get_caida_data.py`, if it needs to be refreshed often.
 - The classifiers hardcode `hege_data = None` in the prompt context — IHR Hegemony (AS dependency) data is not currently retrieved.
