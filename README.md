@@ -117,4 +117,3 @@ Each classifier emits, per route:
 ```
 
 The aggregator adds one field, `justification` — a short label such as `same organization`, `strong relationship`, or `no relationship` — to the same schema.
-- The classifiers hardcode `hege_data = None` in the prompt context — IHR Hegemony (AS dependency) data is not currently retrieved.
