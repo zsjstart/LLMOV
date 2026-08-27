@@ -55,7 +55,6 @@ flowchart LR
 | `get_caida_data.py` / `as_relationship.py` | Loads/queries CAIDA AS-relationship data (`caida.db`) and classifies the origin↔ROA-AS relationship (customer/provider/peer) |
 | `process_htmls.py` | Fetches RIPEstat prefix/ASN data (geolocation, WHOIS/IRR, routing status, transfer history) |
 | `preload_RIPEstat_data.py` | Loads/saves the RIPEstat JSON cache used by the classifiers |
-| `load_ihr_hegemony.py` | Optional IHR Hegemony (AS dependency) lookup, currently disabled in the classifiers |
 | `shaman_data_process_lib.py` | Extracts the RPKI-invalid route set from the input hijack dataset |
 | `fix_json_str.py` | Extracts and parses the JSON object an LLM returns, with a `json_repair` fallback for malformed output |
 | `shaman/real_hijacks_2024.csv` | Input dataset of BGP hijack/misconfiguration events |
@@ -123,4 +122,4 @@ The aggregator adds one field, `justification` — a short label such as `same o
 
 - The aggregator groups verdicts by `(prefix, origin_AS)`. If the same `(prefix, origin_AS)` pair is re-announced at different times, the classifier CSVs currently have no timestamp column to distinguish those events, so they'd be treated as one.
 - `caida.db` (~59 MB) is committed directly to the repo, above GitHub's 50 MB soft warning threshold. Consider Git LFS, or regenerating it locally via `get_caida_data.py`, if it needs to be refreshed often.
-- `load_ihr_hegemony.py` is present but not currently used by the three classifiers (`hege_data` is hardcoded to `None`).
+- The classifiers hardcode `hege_data = None` in the prompt context — IHR Hegemony (AS dependency) data is not currently retrieved.

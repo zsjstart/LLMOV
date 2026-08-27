@@ -3,7 +3,6 @@ from process_htmls import fetch_ripestat_prefix_html, fetch_ripestat_asn_html, b
 import json
 from get_caida_data import get_relationship, get_relationship_dict, get_caida_rels
 from rpki_validator import validate_prefix_asn, extract_roa_asns
-from load_ihr_hegemony import get_heg_dependency
 #from ollama_agent import analyze_with_ollama_model
 from qwen_agent import analyze_with_ChatOpenAI_model
 import pickle
@@ -139,7 +138,6 @@ def together_agent():
             
             caida_data = get_caida_rels(origin_asn, all_relationships)
             
-            #hege_data = get_heg_dependency(origin_asn, roa_asns, timestamp) # Hegemony data can support the Caida data as there are possible errors in caida data.
             hege_data = None
             
             rpki_json = json.dumps(rpki_data)
