@@ -48,8 +48,7 @@ flowchart LR
 | `llm_classifier_nvidia.py` | Single classifier using `nvidia/Llama-3.1-Nemotron-70B-Instruct-HF` |
 | `llm_classifier_qwen.py` | Single classifier using `Qwen/Qwen2.5-72B-Instruct` |
 | `llm_aggregator.py` | Judge/aggregator using `openai/gpt-oss-120b`; reconciles the three classifiers' verdicts per route |
-| `deepseek_agent.py` / `nvidia_agent.py` / `chatopenai_agent.py` | Thin OpenAI-compatible client wrappers, one per classifier, all pointed at a local model server |
-| `gemini_agent.py` | Optional Gemini client (not used by the classifiers by default) |
+| `deepseek_agent.py` / `nvidia_agent.py` / `qwen_agent.py` | Thin OpenAI-compatible client wrappers, one per classifier, all pointed at a local model server |
 | `rpki_validator.py` | Queries a local RPKI relying-party validator (Routinator) for route validity and ROA VRPs |
 | `get_caida_data.py` / `as_relationship.py` | Loads/queries CAIDA AS-relationship data (`caida.db`) and classifies the origin↔ROA-AS relationship (customer/provider/peer) |
 | `process_htmls.py` | Fetches RIPEstat prefix/ASN data (geolocation, WHOIS/IRR, routing status, transfer history) |
@@ -122,4 +121,4 @@ The aggregator adds one field, `justification` — a short label such as `same o
 
 - The aggregator groups verdicts by `(prefix, origin_AS)`. If the same `(prefix, origin_AS)` pair is re-announced at different times, the classifier CSVs currently have no timestamp column to distinguish those events, so they'd be treated as one.
 - `caida.db` (~59 MB) is committed directly to the repo, above GitHub's 50 MB soft warning threshold. Consider Git LFS, or regenerating it locally via `get_caida_data.py`, if it needs to be refreshed often.
-- `gemini_agent.py` and `load_ihr_hegemony.py` are present but not currently used by the three classifiers (`hege_data` is hardcoded to `None`).
+- `load_ihr_hegemony.py` is present but not currently used by the three classifiers (`hege_data` is hardcoded to `None`).

@@ -4,9 +4,8 @@ import json
 from get_caida_data import get_relationship, get_relationship_dict, get_caida_rels
 from rpki_validator import validate_prefix_asn, extract_roa_asns
 from load_ihr_hegemony import get_heg_dependency
-from gemini_agent import analyze_with_gemini
 #from ollama_agent import analyze_with_ollama_model
-from chatopenai_agent import analyze_with_ChatOpenAI_model
+from qwen_agent import analyze_with_ChatOpenAI_model
 import pickle
 from datetime import datetime
 import os
@@ -267,7 +266,6 @@ Consider factors such as economic, policy distance or geographical distance betw
             #in some case, I did see the origin as is a customer of a major upstream (like a tier1 as)
 
             #response = analyze_with_together(Context, query)
-            #response = analyze_with_gemini(Context, query)
             #print(response)
             
             #model_name = "gemma3:27b"
