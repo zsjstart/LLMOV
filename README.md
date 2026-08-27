@@ -115,17 +115,3 @@ Each classifier emits, per route:
 ```
 
 The aggregator adds two fields to the same schema: `aggregation_confidence` (`High` if all three classifiers agreed, `Medium` if two of three agreed, `Low` otherwise) and `model_agreement_summary` (a plain-language, programmatically-generated description of the actual vote split).
-
-## Why not an LLM judge
-
-An earlier version of `llm_aggregator.py` used a fourth, larger model (`openai/gpt-oss-120b`) as an LLM judge that read all three classifiers' outputs and synthesized a final verdict. Evaluated against expert-labeled ground truth on a 45-route random sample (quadratic-weighted Cohen's κ, Landis–Koch scale: <0 poor, 0.21–0.40 fair, 0.41–0.60 moderate, 0.61–0.80 substantial):
-
-| Method | Exact accuracy | QW Kappa | MAE |
-|---|---|---|---|
-| DeepSeek-R1-Distill-Llama-70B (alone) | 48.9% | 0.458 (moderate) | 0.578 |
-| Nemotron-70B (alone) | 77.8% | 0.735 (substantial) | 0.222 |
-| Qwen2.5-72B (alone) | 80.0% | 0.767 (substantial) | 0.200 |
-| **LLM judge (gpt-oss-120b)** | **41.9%** | **0.133 (slight)** | **0.674** |
-| **Ordinal median (current approach)** | **81.4%** | **0.784 (substantial)** | **0.186** |
-
-The LLM judge scored worse than every individual classifier, and worse than doing no aggregation at all. Inspecting its output showed why: on the 135 routes where all three classifiers already agreed unanimously, the judge preserved that verdict only 42.1% of the time — its own `model_agreement_summary` field routinely fabricated disagreement between the classifiers that didn't exist (e.g. claiming "Model 2 assessed it as Medium" on a route where all three had actually agreed on High), then resolved its invented conflict by defaulting to a hedged Medium. The median has no such failure mode.
