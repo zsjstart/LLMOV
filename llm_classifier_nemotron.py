@@ -5,7 +5,7 @@ from get_caida_data import get_relationship, get_relationship_dict, get_caida_re
 from rpki_validator import validate_prefix_asn, extract_roa_asns
 from load_ihr_hegemony import get_heg_dependency
 #from ollama_agent import analyze_with_ollama_model
-from nvidia_agent import analyze_with_ChatOpenAI_model
+from nemotron_agent import analyze_with_ChatOpenAI_model
 import pickle
 from datetime import datetime
 import os
@@ -106,9 +106,9 @@ def together_agent():
     
     #Otherwise:
     #origin_conflicting_routes = examine_invalid_routes()
-    label = "nvidia"
-    model_name = label + "/Llama-3.1-Nemotron-70B-Instruct-HF"   
-    
+    label = "Nemotron"
+    model_name = "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+
     # CSV file path
     csv_file = "./new_results/origin_conflicts/2024/"+label+"_reasoning_origin_conflicting_routes.txt"
     

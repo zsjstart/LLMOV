@@ -45,10 +45,10 @@ flowchart LR
 | File | Role |
 |---|---|
 | `llm_classifier_deepseek.py` | Single classifier using `deepseek-ai/DeepSeek-R1-Distill-Llama-70B` |
-| `llm_classifier_nvidia.py` | Single classifier using `nvidia/Llama-3.1-Nemotron-70B-Instruct-HF` |
+| `llm_classifier_nemotron.py` | Single classifier using `nvidia/Llama-3.1-Nemotron-70B-Instruct-HF` |
 | `llm_classifier_qwen.py` | Single classifier using `Qwen/Qwen2.5-72B-Instruct` |
 | `llm_aggregator.py` | Judge/aggregator using `openai/gpt-oss-120b`; reconciles the three classifiers' verdicts per route |
-| `deepseek_agent.py` / `nvidia_agent.py` / `qwen_agent.py` | Thin OpenAI-compatible client wrappers, one per classifier, all pointed at a local model server |
+| `deepseek_agent.py` / `nemotron_agent.py` / `qwen_agent.py` | Thin OpenAI-compatible client wrappers, one per classifier, all pointed at a local model server |
 | `rpki_validator.py` | Queries a local RPKI relying-party validator (Routinator) for route validity and ROA VRPs |
 | `get_caida_data.py` / `as_relationship.py` | Loads/queries CAIDA AS-relationship data (`caida.db`) and classifies the origin↔ROA-AS relationship (customer/provider/peer) |
 | `process_htmls.py` | Fetches RIPEstat prefix/ASN data (geolocation, WHOIS/IRR, routing status, transfer history) |
@@ -82,7 +82,7 @@ json_repair
 
 ```bash
 python3 llm_classifier_deepseek.py
-python3 llm_classifier_nvidia.py
+python3 llm_classifier_nemotron.py
 python3 llm_classifier_qwen.py
 ```
 
@@ -93,7 +93,7 @@ Each writes JSON-per-route results to `./new_results/origin_conflicts/2024/<labe
 ```bash
 python3 llm_aggregator.py \
   --inputs ./new_results/origin_conflicts/2024/deepseek-ai_reasoning_origin_conflicting_routes.txt \
-           ./new_results/origin_conflicts/2024/nvidia_reasoning_origin_conflicting_routes.txt \
+           ./new_results/origin_conflicts/2024/Nemotron_reasoning_origin_conflicting_routes.txt \
            ./new_results/origin_conflicts/2024/qwen_reasoning_origin_conflicting_routes.txt \
   --provider openai --api-key EMPTY --output aggregated_output.csv
 ```

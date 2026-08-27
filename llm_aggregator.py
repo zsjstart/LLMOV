@@ -22,7 +22,7 @@ python llm_aggregator.py \
     
 Example
 ------
-python3 ../../llm_aggregator.py --inputs ./deepseek-ai_reasoning_origin_conflicting_routes.txt ./nvidia_reasoning_origin_conflicting_routes.txt ./qwen_reasoning_origin_conflicting_routes.txt --api-key EMPATY --provider openai
+python3 ../../llm_aggregator.py --inputs ./deepseek-ai_reasoning_origin_conflicting_routes.txt ./Nemotron_reasoning_origin_conflicting_routes.txt ./qwen_reasoning_origin_conflicting_routes.txt --api-key EMPATY --provider openai
 
 The script matches entries across the three files by "prefix" (primary key)
 and sends each group to the large LLM for aggregation.
