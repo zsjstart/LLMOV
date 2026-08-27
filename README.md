@@ -10,7 +10,7 @@ LLMOV grounds each verdict in retrieval-augmented generation (RAG): rather than 
 
 1. **Retrieval (context collection).** For a given `(prefix, origin_AS, timestamp)`, the pipeline queries a local RPKI validator for the route's validity and covering ROA(s), the CAIDA AS-relationships dataset for the origin↔ROA-AS business relationship, and the RIPEstat API for prefix/ASN metadata (geolocation, WHOIS/IRR, routing status, transfer history). This retrieved evidence is assembled into the shared context passed to every classifier.
 2. **Three independent classifiers (generation).** The retrieved context is sent to three different LLMs, each acting as a single classifier: DeepSeek-R1-Distill-Llama-70B, Llama-3.1-Nemotron-70B-Instruct-HF, and Qwen2.5-72B-Instruct. Each returns a benign-level verdict, an explanation, a possible root cause, and contributing factors as JSON, written to its own CSV.
-3. **Judge / aggregation.** `llm_aggregator.py` groups the three classifiers' verdicts for the same route and sends them to a fourth, larger model (`openai/gpt-oss-120b`) acting as judge. The judge reconciles disagreement, merges explanations, unions the contributing factors, and emits one consolidated verdict plus a short `justification` label.
+3. **Aggregation by median.** `llm_aggregator.py` groups the three classifiers' verdicts for the same route and takes the ordinal median of their `benign_level` (Low < Medium < High) as the final verdict, unions their contributing factors, and reports how many of the three agreed as `aggregation_confidence`. An earlier version used a fourth, larger model (`openai/gpt-oss-120b`) as an LLM judge instead; it was replaced after evaluation showed it performed worse than every individual classifier and worse than this plain median — see [Why not an LLM judge](#why-not-an-llm-judge) below.
 
 ## Architecture
 
@@ -23,7 +23,7 @@ flowchart LR
     B --> C2["Nemotron"]
     B --> C3["Qwen"]
 
-    C1 --> D["Judge<br/>gpt-oss-120b"]
+    C1 --> D["Median<br/>aggregation"]
     C2 --> D
     C3 --> D
 
@@ -49,7 +49,7 @@ flowchart LR
 | `llm_classifier_deepseek.py` | Single classifier using `deepseek-ai/DeepSeek-R1-Distill-Llama-70B` |
 | `llm_classifier_nemotron.py` | Single classifier using `nvidia/Llama-3.1-Nemotron-70B-Instruct-HF` |
 | `llm_classifier_qwen.py` | Single classifier using `Qwen/Qwen2.5-72B-Instruct` |
-| `llm_aggregator.py` | Judge/aggregator using `openai/gpt-oss-120b`; reconciles the three classifiers' verdicts per route |
+| `llm_aggregator.py` | Aggregates the three classifiers' verdicts per route by ordinal median (no LLM call) |
 | `deepseek_agent.py` / `nemotron_agent.py` / `qwen_agent.py` | Thin OpenAI-compatible client wrappers, one per classifier, all pointed at a local model server |
 | `rpki_validator.py` | Queries a local RPKI relying-party validator (Routinator) for route validity and ROA VRPs |
 | `get_caida_data.py` / `as_relationship.py` | Loads/queries CAIDA AS-relationship data (`caida.db`) and classifies the origin↔ROA-AS relationship (customer/provider/peer) |
@@ -64,16 +64,14 @@ flowchart LR
 ## Requirements
 
 **Services expected to be running locally:**
-- An OpenAI-compatible model server (e.g. vLLM) at `http://localhost:8000/v1`, serving all four models: `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`, `nvidia/Llama-3.1-Nemotron-70B-Instruct-HF`, `Qwen/Qwen2.5-72B-Instruct`, `openai/gpt-oss-120b`.
+- An OpenAI-compatible model server (e.g. vLLM) at `http://localhost:8000/v1`, serving the three classifier models: `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`, `nvidia/Llama-3.1-Nemotron-70B-Instruct-HF`, `Qwen/Qwen2.5-72B-Instruct`. `llm_aggregator.py` needs no model server — it aggregates by median in plain Python.
 - A Routinator (or compatible RPKI relying-party) instance exposing its validity API at `http://127.0.0.1:8323`.
 
 **Python packages:**
 ```
 requests
 beautifulsoup4
-openai
 langchain-openai
-google-generativeai
 json_repair
 ```
 
@@ -89,14 +87,14 @@ python3 llm_classifier_qwen.py
 
 Each writes JSON-per-route results to `./new_results/origin_conflicts/2024/<label>_reasoning_origin_conflicting_routes.txt` (CSV format).
 
-### 2. Aggregate with the judge model
+### 2. Aggregate by median
 
 ```bash
 python3 llm_aggregator.py \
   --inputs ./new_results/origin_conflicts/2024/deepseek-ai_reasoning_origin_conflicting_routes.txt \
            ./new_results/origin_conflicts/2024/Nemotron_reasoning_origin_conflicting_routes.txt \
            ./new_results/origin_conflicts/2024/qwen_reasoning_origin_conflicting_routes.txt \
-  --provider openai --api-key EMPTY --output aggregated_output.csv
+  --output aggregated_output.csv
 ```
 
 ## Output schema
@@ -116,4 +114,18 @@ Each classifier emits, per route:
 }
 ```
 
-The aggregator adds one field, `justification` — a short label such as `same organization`, `strong relationship`, or `no relationship` — to the same schema.
+The aggregator adds two fields to the same schema: `aggregation_confidence` (`High` if all three classifiers agreed, `Medium` if two of three agreed, `Low` otherwise) and `model_agreement_summary` (a plain-language, programmatically-generated description of the actual vote split).
+
+## Why not an LLM judge
+
+An earlier version of `llm_aggregator.py` used a fourth, larger model (`openai/gpt-oss-120b`) as an LLM judge that read all three classifiers' outputs and synthesized a final verdict. Evaluated against expert-labeled ground truth on a 45-route random sample (quadratic-weighted Cohen's κ, Landis–Koch scale: <0 poor, 0.21–0.40 fair, 0.41–0.60 moderate, 0.61–0.80 substantial):
+
+| Method | Exact accuracy | QW Kappa | MAE |
+|---|---|---|---|
+| DeepSeek-R1-Distill-Llama-70B (alone) | 48.9% | 0.458 (moderate) | 0.578 |
+| Nemotron-70B (alone) | 77.8% | 0.735 (substantial) | 0.222 |
+| Qwen2.5-72B (alone) | 80.0% | 0.767 (substantial) | 0.200 |
+| **LLM judge (gpt-oss-120b)** | **41.9%** | **0.133 (slight)** | **0.674** |
+| **Ordinal median (current approach)** | **81.4%** | **0.784 (substantial)** | **0.186** |
+
+The LLM judge scored worse than every individual classifier, and worse than doing no aggregation at all. Inspecting its output showed why: on the 135 routes where all three classifiers already agreed unanimously, the judge preserved that verdict only 42.1% of the time — its own `model_agreement_summary` field routinely fabricated disagreement between the classifiers that didn't exist (e.g. claiming "Model 2 assessed it as Medium" on a route where all three had actually agreed on High), then resolved its invented conflict by defaulting to a hedged Medium. The median has no such failure mode.
