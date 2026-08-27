@@ -6,8 +6,10 @@ For each RPKI-invalid route, LLMOV assigns a **benign likelihood level** (`Low` 
 
 ## How it works
 
-1. **Context collection.** For a given `(prefix, origin_AS, timestamp)`, the pipeline gathers RPKI validation output, CAIDA AS-relationship data, and RIPEstat prefix/ASN data (geolocation, WHOIS/IRR, routing status, transfer history).
-2. **Three independent classifiers.** The same context is sent to three different LLMs, each acting as a single classifier: DeepSeek-R1-Distill-Llama-70B, Llama-3.1-Nemotron-70B-Instruct-HF, and Qwen2.5-72B-Instruct. Each returns a benign-level verdict, an explanation, a possible root cause, and contributing factors as JSON, written to its own CSV.
+LLMOV grounds each verdict in retrieval-augmented generation (RAG): rather than asking an LLM to judge a route from parametric knowledge alone, it first retrieves live, route-specific evidence from authoritative routing-data sources and injects it into the prompt as context, so the model reasons over actual RPKI/CAIDA/RIPEstat facts for that exact `(prefix, origin_AS, timestamp)` instead of guessing.
+
+1. **Retrieval (context collection).** For a given `(prefix, origin_AS, timestamp)`, the pipeline queries a local RPKI validator for the route's validity and covering ROA(s), the CAIDA AS-relationships dataset for the origin↔ROA-AS business relationship, and the RIPEstat API for prefix/ASN metadata (geolocation, WHOIS/IRR, routing status, transfer history). This retrieved evidence is assembled into the shared context passed to every classifier.
+2. **Three independent classifiers (generation).** The retrieved context is sent to three different LLMs, each acting as a single classifier: DeepSeek-R1-Distill-Llama-70B, Llama-3.1-Nemotron-70B-Instruct-HF, and Qwen2.5-72B-Instruct. Each returns a benign-level verdict, an explanation, a possible root cause, and contributing factors as JSON, written to its own CSV.
 3. **Judge / aggregation.** `llm_aggregator.py` groups the three classifiers' verdicts for the same route and sends them to a fourth, larger model (`openai/gpt-oss-120b`) acting as judge. The judge reconciles disagreement, merges explanations, unions the contributing factors, and emits one consolidated verdict plus a short `justification` label.
 
 ## Architecture
@@ -15,7 +17,7 @@ For each RPKI-invalid route, LLMOV assigns a **benign likelihood level** (`Low` 
 ```mermaid
 %%{init: {"flowchart": {"nodeSpacing": 80, "rankSpacing": 110, "padding": 25}, "themeVariables": {"fontSize": "34px"}}}%%
 flowchart LR
-    A["RPKI-invalid<br/>BGP routes"] --> B["Context collection<br/>RPKI · CAIDA · RIPEstat"]
+    A["RPKI-invalid<br/>BGP routes"] --> B["Retrieval (RAG)<br/>RPKI · CAIDA · RIPEstat"]
 
     B --> C1["DeepSeek"]
     B --> C2["Nemotron"]
