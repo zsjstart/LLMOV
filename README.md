@@ -15,17 +15,17 @@ For each RPKI-invalid route, LLMOV assigns a **benign likelihood level** (`Low` 
 ```mermaid
 %%{init: {"flowchart": {"nodeSpacing": 80, "rankSpacing": 110, "padding": 25}, "themeVariables": {"fontSize": "34px"}}}%%
 flowchart LR
-    A(["RPKI-invalid<br/>BGP routes"]) --> B["Context collection<br/>RPKI · CAIDA · RIPEstat"]
+    A["RPKI-invalid<br/>BGP routes"] --> B["Context collection<br/>RPKI · CAIDA · RIPEstat"]
 
     B --> C1["DeepSeek"]
     B --> C2["Nemotron"]
     B --> C3["Qwen"]
 
-    C1 --> D{{"Judge<br/>gpt-oss-120b"}}
+    C1 --> D["Judge<br/>gpt-oss-120b"]
     C2 --> D
     C3 --> D
 
-    D --> E(["Benign-conflict<br/>verdict"])
+    D --> E["Benign-conflict<br/>verdict"]
 
     classDef input fill:#e8f0fe,stroke:#4285f4,stroke-width:2px,color:#1a1a1a;
     classDef context fill:#fef7e0,stroke:#f9ab00,stroke-width:2px,color:#1a1a1a;
